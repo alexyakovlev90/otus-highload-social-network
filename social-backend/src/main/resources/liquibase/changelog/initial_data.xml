@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="init data" author="titkin">
+        <loadData file="liquibase/init_data/1-vehicle.csv" separator=";" tableName="vehicle">
+            <column name="name" type="string"/>
+        </loadData>
+        <loadData file="liquibase/init_data/2-factory.csv" separator=";" tableName="factory">
+            <column name="name" type="string"/>
+            <column name="location" type="string"/>
+        </loadData>
+        <loadData file="liquibase/init_data/3-route.csv" separator=";" tableName="route">
+            <column name="vehicle_id" type="NUMERIC"/>
+            <column name="factory_id" type="NUMERIC"/>
+        </loadData>
+        <loadData file="liquibase/init_data/4-building_object.csv" separator=";" tableName="building_object">
+            <column name="name" type="string"/>
+            <column name="location" type="string"/>
+            <column name="route_id" type="NUMERIC"/>
+        </loadData>
+        <loadData file="liquibase/init_data/5-building_material.csv" separator=";" tableName="building_material">
+            <column name="name" type="string"/>
+            <column name="quantity" type="NUMERIC"/>
+            <column name="building_object_id" type="NUMERIC"/>
+            <column name="vehicle_id" type="NUMERIC"/>
+            <column name="route_id" type="NUMERIC"/>
+            <column name="factory_id" type="NUMERIC"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

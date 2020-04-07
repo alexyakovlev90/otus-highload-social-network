@@ -1,0 +1,18 @@
+<div class="signin-content">
+  <mat-card>
+    <mat-card-content>
+      <h2>Admin Template</h2>
+      <form class="vertical-container" #mainForm="ngForm">
+        <mat-form-field>
+          <input autocomplete="username" matInput placeholder="Логин" name="login" [(ngModel)]="login" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input autocomplete="current-password" matInput placeholder="Пароль" name="password" type="password" [(ngModel)]="password" required>
+        </mat-form-field>
+      </form>
+      <button mat-raised-button color="primary" (click)="doSignin($event, mainForm)">Войти</button>
+      <p>{{error}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
