@@ -1,9 +1,11 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from 'rxjs';
 
 
 import {Router} from '@angular/router';
+import {ObjectResponse} from "../shared/response.model";
+import {catchError, map} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 
 @Injectable(
@@ -21,6 +23,7 @@ export class AuthService {
   }
 
   public login(username: string, password: string): Observable<Object> {
+
     let body = new FormData();
     body.append('username', username);
     body.append('password', password);
@@ -30,13 +33,13 @@ export class AuthService {
       {});
   }
 
-
-
-  private checkLoggedIn(){
-    return this.httpClient.get(
+  private checkLoggedIn() {
+    return this.httpClient.get<ObjectResponse<any>>(
       "/api/security")
-      .catch(err => Observable.of(false))
-      .map(next => true, error => false);
+      .pipe(
+        map(next => next.result === "success", error => false),
+        catchError(err => Observable.throw(err))
+      )
   }
 
   public logout() {

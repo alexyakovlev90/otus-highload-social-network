@@ -1,0 +1,16 @@
+<header>
+  <mat-toolbar>
+    <span class="tinkoff-target-label">AY    </span>
+    <button mat-button routerLink="/home">Home</button>
+    <button mat-button routerLink="/search">Search</button>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">Exit</button>
+  </mat-toolbar>
+
+</header>
+<div class="pageContent">
+  <router-outlet></router-outlet>
+</div>
+<footer>
+
+</footer>

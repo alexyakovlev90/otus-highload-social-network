@@ -2,91 +2,10 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-body {
-  margin: 0;
-  font-family: Roboto, sans-serif;
-}
-
-
-.selected-row-main {
-  background: lightblue;
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .vertical-container {
   display: flex;
   flex-direction: column;
-}
-
-.tab-content {
-  margin-left: 20px;
-  margin-top:20px;
-}
-
-.mat-form-field {
-  width: 350px;
-  /*width: 90%;*/
-}
-/*for flexible form-field sizes*/
-.flex-size{
-  width: 90%;
-}
-
-.notification {
-  position: absolute;
-  z-index: 1;
-  top: 5px;
-  line-height: 20px;
-  text-align: center;
-  right: 5px;
-  background: linear-gradient(-90deg, #cb5cd2, #cc3fa0);
-  color: white;
-  font-style: oblique;
-  text-transform: capitalize;
-  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-  min-height: 20px;
-  min-width: 160px;
-  max-width: 300px;
-  padding: 15px;
-  cursor: pointer;
-}
-
-.spacer {flex: 1 1 auto;}
-
-.basic-container {
-  padding: 30px;
-}
-
-.button-row {
-  padding-bottom: 10px;
-}
-
-.project-name-highlight {
-  padding-right: 10px;
-}
-
-/*for entities edit forms*/
-.col-10 {
-  float: left;
-  width: 10%;
-  margin: 0 2px 0 0;
-}
-
-.col-25 {
-  float: left;
-  width: 25%;
-  margin: 0 2px 0 0;
-}
-
-.col-40 {
-  float: left;
-  width: 40%;
-  margin: 0 2px 0 0;
-}
-
-agm-map {
-  height: 300px;
-}
-
-.mat-form-field--no-underline .mat-input-underline {
-  background-color: transparent;
 }

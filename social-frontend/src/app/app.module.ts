@@ -1,37 +1,49 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import {AppComponent} from './app.component';
-import {BuildingObjectComponent} from './feature/building-object/building-object.component';
-import {BuildingMaterialComponent} from './feature/building-material/building-material.component';
-import {MainComponent} from './feature/main/main.component';
-import {SigninComponent} from "./feature/auth/signin/signin.component";
-import {SigninLayoutComponent} from "./feature/auth/signin/signin-layout.component";
-import {AppRoutingModule} from "./app-routing.module";
-import {MaterialModule} from "./material/material.module";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import {SigninLayoutComponent} from "./auth/signin/signin-layout.component";
+import {SigninComponent} from "./auth/signin/signin.component";
+import {MainLayoutComponent} from "./main-layout/main-layout.component";
+import {FormsModule} from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from "@angular/material/card";
+import {MatFormField, MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import { HomeComponent } from './feature/home/home.component';
+import { SearchComponent } from './feature/search/search.component';
+import {AuthGuard} from "./auth/auth.guard";
+import {AuthService} from "./auth/auth.service";
 import {HttpClientModule} from "@angular/common/http";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
     AppComponent,
-    BuildingObjectComponent,
-    BuildingMaterialComponent,
+    MainLayoutComponent,
     SigninComponent,
     SigninLayoutComponent,
-    MainComponent,
+    HomeComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatToolbarModule,
+    HttpClientModule,
+    MatInputModule,
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

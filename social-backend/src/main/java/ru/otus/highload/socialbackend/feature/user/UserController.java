@@ -17,7 +17,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) throws URISyntaxException {
+    public ResponseEntity<User> createUser(@RequestBody User userDto) throws URISyntaxException {
 //        log.debug("REST request to save Factory : {}", factoryDTO);
 //        if (factoryDTO.getId() != null) {
 //            throw new BadRequestAlertException("A new factory cannot already have an ID", ENTITY_NAME, "idexists");
@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) throws URISyntaxException {
+    public ResponseEntity<User> updateUser(@RequestBody User userDto) throws URISyntaxException {
 //        log.debug("REST request to update Factory : {}", factoryDTO);
 //        if (factoryDTO.getId() == null) {
 //            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
         return null;
     }
 

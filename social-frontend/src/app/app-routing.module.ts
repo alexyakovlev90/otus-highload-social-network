@@ -1,21 +1,28 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {SigninLayoutComponent} from "./auth/signin/signin-layout.component";
+import {SigninComponent} from "./auth/signin/signin.component";
+import {AuthGuard} from "./auth/auth.guard";
+import {MainLayoutComponent} from "./main-layout/main-layout.component";
+import {HomeComponent} from "./feature/home/home.component";
+import {SearchComponent} from "./feature/search/search.component";
 
-import {MainComponent} from "./feature/main/main.component";
-import {BuildingMaterialComponent} from "./feature/building-material/building-material.component";
-import {BuildingObjectComponent} from "./feature/building-object/building-object.component";
-import {SigninComponent} from "./feature/auth/signin/signin.component";
-import {SigninLayoutComponent} from "./feature/auth/signin/signin-layout.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: MainComponent,
-    // canActivate: [AuthGuard],
+    component: MainLayoutComponent,
+    canActivate: [AuthGuard],
     children: [
-      {path: 'building-materials', component: BuildingMaterialComponent},
-      {path: 'building-objects', component: BuildingObjectComponent}
+      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      {
+        path: 'home', component: HomeComponent,
+        // resolve: {body: HomeResolver}
+      },
+      {
+        path: 'search', component: SearchComponent,
+        // resolve: {body: HomeResolver}
+      },
     ]
   },
   {
@@ -23,18 +30,10 @@ const routes: Routes = [
       {path: 'signin', component: SigninComponent}
     ]
   }
-
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ],
-  declarations: []
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

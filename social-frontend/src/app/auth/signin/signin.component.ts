@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms'
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from "rxjs/index";
 import {AuthService} from "../auth.service";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -25,19 +25,19 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.loginSubscription){
+    if (this.loginSubscription) {
       this.loginSubscription.unsubscribe();
     }
   }
 
   doSignin($event, form: NgForm) {
     this.error = '';
-    this.loginSubscription = this.authService.login(this.login, this.password).subscribe(next => {
-      this.router.navigate(["/"], {queryParams: null});
-
-    }, errorResponce => {
-      this.error= errorResponce.error.msg;
-    });
+    this.loginSubscription = this.authService.login(this.login, this.password)
+      .subscribe(next => {
+        this.router.navigate(["/"], {queryParams: null});
+      }, errorResponce => {
+        this.error = errorResponce.error.msg;
+      });
   }
 
 }
