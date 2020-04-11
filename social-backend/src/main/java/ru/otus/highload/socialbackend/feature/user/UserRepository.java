@@ -1,8 +1,8 @@
-package ru.otus.highload.socialbackend.repository;
+package ru.otus.highload.socialbackend.feature.user;
 
-import ru.otus.highload.socialbackend.domain.BuildingMaterial;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import ru.otus.highload.socialbackend.domain.User;
 
 
 /**
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface BuildingMaterialRepository extends JpaRepository<BuildingMaterial, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/security")
 @Api(value = "security", description = "Some security check methods")
-
 public class SecurityController {
 
 

@@ -1,0 +1,4 @@
+id;login;password_hash;first_name;last_name;age;sex;interest;city
+1;titkin;12345_fakehash;Кеша;Титькин;18;1;Sex, drugs and Rock'n'Roll;Moscow
+2;predator123;12345_fakehash;Ivan;Ivanov;25;1;Coding;Moscow
+3;ololosha;12345_fakehash;Alesha;Ololosha;20;0;MEMES;Abakan

@@ -30,9 +30,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/logout").permitAll()
+                //swagger
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/documentation/swagger/**").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/v2/api-docs/**").permitAll()
+//                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
         http
                 .cors()
