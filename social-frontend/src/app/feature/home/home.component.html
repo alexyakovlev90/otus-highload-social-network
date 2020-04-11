@@ -1,0 +1,72 @@
+<p>home works!</p>
+<div class="container">
+  <div class="row profile">
+    <div class="col-md-4">
+      <div class="page-sidebar">
+        <!-- SIDEBAR USERPIC -->
+        <div class="profile-userpic">
+              <img src="img/account-default.jpg" class="img-responsive">
+        </div>
+        <!-- END SIDEBAR USERPIC -->
+<!--TODO когда будет возможность подружиться-->
+        <!-- SIDEBAR BUTTONS -->
+<!--        <div class="sidebar-buttons">-->
+<!--          <c:if test='${sessionScope.get("id") == account.id}'>-->
+<!--            <a type="button" class="btn btn-primary btn-sm"-->
+<!--               href="${pageContext.request.contextPath}/groupSettings">Create group</a>-->
+<!--            <a type="button" class="btn btn-primary btn-sm"-->
+<!--               href="${pageContext.request.contextPath}/makeXML?id=${account.id}">Export to XML</a>-->
+<!--          </c:if>-->
+<!--          <c:if test='${relation == "STRANGER"}'>-->
+<!--            <a type="button" class="btn btn-primary btn-sm"-->
+<!--               href="${pageContext.request.contextPath}/sendFriendRequest?toId=${account.id}">Add to-->
+<!--              friends</a>-->
+<!--          </c:if>-->
+<!--          <c:if test='${relation == "FOLLOWER"}'>-->
+<!--            <a type="button" class="btn btn-primary btn-sm"-->
+<!--               href="${pageContext.request.contextPath}/acceptFriendRequest?fromId=${account.id}">Accept-->
+<!--              friendship</a>-->
+<!--          </c:if>-->
+<!--          <c:if test='${relation == "FOLLOWED"}'>-->
+<!--            <a type="button" class="btn btn-primary btn-sm disabled">Request sent</a>-->
+<!--            <a type="button" class="btn btn-primary btn-sm"-->
+<!--               href="${pageContext.request.contextPath}/deleteRequest?accId=${account.id}">Withdraw-->
+<!--              request</a>-->
+<!--          </c:if>-->
+<!--          <c:if test='${relation == "FRIEND"}'>-->
+<!--            <a type="button" class="btn btn-primary btn-sm disabled">Your friend</a>-->
+<!--            <a type="button" class="btn btn-primary btn-sm"-->
+<!--               href="${pageContext.request.contextPath}/deleteRequest?accId=${account.id}">Remove from-->
+<!--              friends</a>-->
+<!--          </c:if>-->
+
+            <a type="button" class="btn btn-primary btn-sm"
+               href="${pageContext.request.contextPath}/messages?recipientId=${account.id}">Send message</a>
+            <a type="button" class="btn btn-primary btn-sm"
+               href="${pageContext.request.contextPath}/account/${account.id}/friends">Show friends</a>
+        </div>
+
+        <!-- END SIDEBAR BUTTONS -->
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="page-content">
+        <!-- SIDEBAR USER TITLE -->
+        <div class="profile-user">
+          <h1>
+            <div class="profile-user-name">
+
+            </div>
+          </h1>
+          <%--<div class="profile-user-contact">--%>
+          <table class="table table-striped">
+                <tr>
+                  <td><strong>Registration date:</strong></td>
+                </tr>
+          </table>
+          <%--</div>--%>
+        </div>
+        <!-- END SIDEBAR USER TITLE -->
+      </div>
+    </div>
+</div>
