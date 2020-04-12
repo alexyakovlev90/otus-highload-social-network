@@ -8,6 +8,7 @@ import {HomeComponent} from "./feature/home/home.component";
 import {SearchComponent} from "./feature/search/search.component";
 import {SignUpComponent} from "./feature/sign-up/sign-up.component";
 import {HomeResolver} from "./feature/home/home.resolver";
+import {SearchResolver} from "./feature/search/search.resolver";
 
 
 const routes: Routes = [
@@ -23,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'search', component: SearchComponent,
-        // resolve: {body: HomeResolver}
+        resolve: {body: SearchResolver}
       },
       {path: 'signup', component: SignUpComponent},
     ]

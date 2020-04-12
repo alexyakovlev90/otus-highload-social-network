@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {UserInfoItem} from "../user/user.model";
+import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from "../user/user.service";
 
 @Component({
   selector: 'app-search',
@@ -7,14 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+              private router: Router, private userService: UserService) { }
 
-  users = [
-    { name: 'Name', login: 'login'},
-    { name: 'Name', login: 'login'}
-  ];
+  users: UserInfoItem[];
 
   ngOnInit(): void {
+    this.route.data.subscribe(item => {
+      this.users = item.body
+    });
   }
 
 }

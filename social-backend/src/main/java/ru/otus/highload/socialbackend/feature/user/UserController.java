@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.highload.socialbackend.domain.User;
+import ru.otus.highload.socialbackend.rest.response.ListResponse;
 import ru.otus.highload.socialbackend.rest.response.Response;
 
 import java.net.URISyntaxException;
@@ -44,8 +45,8 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAll();
+    public ListResponse<User> getAllUsers() {
+        return new ListResponse<>(userService.getAll());
     }
 
     @GetMapping("/{id}")
