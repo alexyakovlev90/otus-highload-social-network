@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {SigninLayoutComponent} from "./auth/signin/signin-layout.component";
-import {SigninComponent} from "./auth/signin/signin.component";
+import {SignInLayoutComponent} from "./feature/signin/sign-in-layout.component";
+import {SignInComponent} from "./feature/signin/sign-in.component";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
 import {FormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,18 +21,19 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatListModule} from "@angular/material/list";
 import { CardComponent } from './feature/card/card.component';
-import { RegPageComponent } from './feature/reg-page/reg-page.component';
+import { SignUpComponent } from './feature/sign-up/sign-up.component';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
     AppComponent,
     MainLayoutComponent,
-    SigninComponent,
-    SigninLayoutComponent,
+    SignInComponent,
+    SignInLayoutComponent,
     HomeComponent,
     SearchComponent,
     CardComponent,
-    RegPageComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +48,7 @@ import { RegPageComponent } from './feature/reg-page/reg-page.component';
     MatButtonModule,
     MatDividerModule,
     MatListModule,
+    MatSelectModule,
   ],
   providers: [
     AuthGuard,

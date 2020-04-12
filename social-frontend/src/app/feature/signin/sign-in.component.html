@@ -2,7 +2,6 @@
   <mat-card>
     <mat-card-content>
       <h1>AY</h1>
-      <h3>Sign In...</h3>
       <form class="vertical-container" #mainForm="ngForm">
         <mat-form-field>
           <mat-label>Username</mat-label>
@@ -16,7 +15,11 @@
                  name="password" type="password" [(ngModel)]="password" required>
         </mat-form-field>
       </form>
-      <button mat-raised-button color="primary" (click)="doSignin($event, mainForm)">Войти</button>
+      <div>
+        <button mat-raised-button color="primary" (click)="doSignin($event, mainForm)">Sign In</button>
+        &nbsp;
+        <button mat-raised-button color="primary" (click)="doSignUp()">Sign Up</button>
+      </div>
       <p>{{error}}</p>
     </mat-card-content>
   </mat-card>

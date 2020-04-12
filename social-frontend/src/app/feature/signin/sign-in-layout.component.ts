@@ -7,4 +7,4 @@ import {Component} from '@angular/core';
   `,
   styles: []
 })
-export class SigninLayoutComponent {}
+export class SignInLayoutComponent {}

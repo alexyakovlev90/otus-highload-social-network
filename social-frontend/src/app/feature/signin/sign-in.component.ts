@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms'
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from "../auth.service";
+import {AuthService} from "../../auth/auth.service";
 import {Subscription} from "rxjs";
 
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css'],
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.css'],
 })
-export class SigninComponent implements OnInit, OnDestroy {
+export class SignInComponent implements OnInit, OnDestroy {
 
   login: string;
   password: string;
@@ -40,4 +40,7 @@ export class SigninComponent implements OnInit, OnDestroy {
       });
   }
 
+  doSignUp() {
+    this.router.navigate(["/signup"], {queryParams: null});
+  }
 }
