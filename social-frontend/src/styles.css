@@ -9,3 +9,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   flex-direction: column;
 }
+
+.profile-userpic img {
+  width: 220px;
+  height: 220px;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  /*max-width: 50%;*/
+  /*max-height: 50%;*/
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(59, 59, 59, 0.8);
+  margin-bottom: 2%;
+}
+
+/* Profile Content */
+.page-content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+

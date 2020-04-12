@@ -1,72 +1,33 @@
-<p>home works!</p>
-<div class="container">
-  <div class="row profile">
-    <div class="col-md-4">
-      <div class="page-sidebar">
-        <!-- SIDEBAR USERPIC -->
-        <div class="profile-userpic">
-              <img src="img/account-default.jpg" class="img-responsive">
-        </div>
-        <!-- END SIDEBAR USERPIC -->
-<!--TODO когда будет возможность подружиться-->
-        <!-- SIDEBAR BUTTONS -->
-<!--        <div class="sidebar-buttons">-->
-<!--          <c:if test='${sessionScope.get("id") == account.id}'>-->
-<!--            <a type="button" class="btn btn-primary btn-sm"-->
-<!--               href="${pageContext.request.contextPath}/groupSettings">Create group</a>-->
-<!--            <a type="button" class="btn btn-primary btn-sm"-->
-<!--               href="${pageContext.request.contextPath}/makeXML?id=${account.id}">Export to XML</a>-->
-<!--          </c:if>-->
-<!--          <c:if test='${relation == "STRANGER"}'>-->
-<!--            <a type="button" class="btn btn-primary btn-sm"-->
-<!--               href="${pageContext.request.contextPath}/sendFriendRequest?toId=${account.id}">Add to-->
-<!--              friends</a>-->
-<!--          </c:if>-->
-<!--          <c:if test='${relation == "FOLLOWER"}'>-->
-<!--            <a type="button" class="btn btn-primary btn-sm"-->
-<!--               href="${pageContext.request.contextPath}/acceptFriendRequest?fromId=${account.id}">Accept-->
-<!--              friendship</a>-->
-<!--          </c:if>-->
-<!--          <c:if test='${relation == "FOLLOWED"}'>-->
-<!--            <a type="button" class="btn btn-primary btn-sm disabled">Request sent</a>-->
-<!--            <a type="button" class="btn btn-primary btn-sm"-->
-<!--               href="${pageContext.request.contextPath}/deleteRequest?accId=${account.id}">Withdraw-->
-<!--              request</a>-->
-<!--          </c:if>-->
-<!--          <c:if test='${relation == "FRIEND"}'>-->
-<!--            <a type="button" class="btn btn-primary btn-sm disabled">Your friend</a>-->
-<!--            <a type="button" class="btn btn-primary btn-sm"-->
-<!--               href="${pageContext.request.contextPath}/deleteRequest?accId=${account.id}">Remove from-->
-<!--              friends</a>-->
-<!--          </c:if>-->
 
-            <a type="button" class="btn btn-primary btn-sm"
-               href="${pageContext.request.contextPath}/messages?recipientId=${account.id}">Send message</a>
-            <a type="button" class="btn btn-primary btn-sm"
-               href="${pageContext.request.contextPath}/account/${account.id}/friends">Show friends</a>
-        </div>
+<mat-card class="page-content">
+  <mat-card-header>
+    <mat-card-title>NAME</mat-card-title>
+    <mat-card-subtitle>Login</mat-card-subtitle>
+  </mat-card-header>
+  <div class="profile-userpic">
+    <img src="https://avatarfiles.alphacoders.com/442/44217.jpg" class="img-responsive">
+  </div>
+  <mat-divider></mat-divider>
+  <mat-card-actions align="center">
+    <button mat-raised-button color="accent">Add to friends</button>
+    <button mat-raised-button color="accent">Show friends</button>
+  </mat-card-actions>
+  <mat-card-content>
+    <mat-list>
+      <div mat-subheader>User info</div>
+      <mat-list-item>
+        <div>Field1</div>
+        <div>Value</div>
+      </mat-list-item>
+      <mat-list-item>
+        <div>Field2</div>
+        <div>Value</div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
 
-        <!-- END SIDEBAR BUTTONS -->
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="page-content">
-        <!-- SIDEBAR USER TITLE -->
-        <div class="profile-user">
-          <h1>
-            <div class="profile-user-name">
+<!-- SIDEBAR USERPIC -->
 
-            </div>
-          </h1>
-          <%--<div class="profile-user-contact">--%>
-          <table class="table table-striped">
-                <tr>
-                  <td><strong>Registration date:</strong></td>
-                </tr>
-          </table>
-          <%--</div>--%>
-        </div>
-        <!-- END SIDEBAR USER TITLE -->
-      </div>
-    </div>
-</div>
+
+

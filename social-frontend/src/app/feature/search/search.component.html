@@ -1,1 +1,14 @@
-<p>search works!</p>
+
+<div class="search-panel">
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Search users</mat-label>
+      <input matInput placeholder="Type the name">
+    </mat-form-field>
+  </form>
+
+  <div *ngFor="let user of users">
+    <app-card></app-card>
+  </div>
+
+</div>

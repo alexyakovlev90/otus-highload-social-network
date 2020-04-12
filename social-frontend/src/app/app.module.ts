@@ -18,6 +18,10 @@ import {AuthService} from "./auth/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
+import {MatDividerModule} from "@angular/material/divider";
+import {MatListModule} from "@angular/material/list";
+import { CardComponent } from './feature/card/card.component';
+import { RegPageComponent } from './feature/reg-page/reg-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ import {MatButtonModule} from "@angular/material/button";
     SigninLayoutComponent,
     HomeComponent,
     SearchComponent,
+    CardComponent,
+    RegPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +45,8 @@ import {MatButtonModule} from "@angular/material/button";
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
+    MatDividerModule,
+    MatListModule,
   ],
   providers: [
     AuthGuard,

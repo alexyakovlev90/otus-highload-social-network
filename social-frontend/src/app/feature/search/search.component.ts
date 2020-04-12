@@ -9,6 +9,11 @@ export class SearchComponent implements OnInit {
 
   constructor() { }
 
+  users = [
+    { name: 'Name', login: 'login'},
+    { name: 'Name', login: 'login'}
+  ];
+
   ngOnInit(): void {
   }
 
