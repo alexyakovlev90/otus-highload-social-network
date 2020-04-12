@@ -12,6 +12,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+    }
+
     public List<User> getAll() {
         return userRepository.findAll();
     }

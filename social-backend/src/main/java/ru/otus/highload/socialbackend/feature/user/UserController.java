@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.highload.socialbackend.domain.User;
+import ru.otus.highload.socialbackend.rest.response.Response;
 
 import java.net.URISyntaxException;
 import java.util.List;
@@ -48,8 +49,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id) {
-        return null;
+    public Response<User> getUser(@PathVariable Long id) {
+        return new Response<>(userService.getById(id));
     }
 
     @DeleteMapping("/{id}")

@@ -1,8 +1,8 @@
 
 <mat-card class="page-content">
   <mat-card-header>
-    <mat-card-title>NAME</mat-card-title>
-    <mat-card-subtitle>Login</mat-card-subtitle>
+    <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
+    <mat-card-subtitle>{{user.id}}:{{user.login}}</mat-card-subtitle>
   </mat-card-header>
   <div class="profile-userpic">
     <img src="https://avatarfiles.alphacoders.com/442/44217.jpg" class="img-responsive">
@@ -16,12 +16,12 @@
     <mat-list>
       <div mat-subheader>User info</div>
       <mat-list-item>
-        <div>Field1</div>
-        <div>Value</div>
+        <div>Age: </div>
+        <div>{{user.age}}</div>
       </mat-list-item>
       <mat-list-item>
-        <div>Field2</div>
-        <div>Value</div>
+        <div>Interests: </div>
+        <div>{{user.interest}}</div>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

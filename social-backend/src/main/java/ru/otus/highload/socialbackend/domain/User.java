@@ -11,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 
@@ -60,4 +61,7 @@ public class User implements Serializable {
     @Size(max = 100)
     @Column(name = "city")
     private String city;
+
+    @Column(name = "REGISTER_DATE")
+    private Date registerDate;
 }

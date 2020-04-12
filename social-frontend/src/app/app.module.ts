@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {SignInLayoutComponent} from "./feature/signin/sign-in-layout.component";
-import {SignInComponent} from "./feature/signin/sign-in.component";
+import {SignInLayoutComponent} from "./feature/sign-in/sign-in-layout.component";
+import {SignInComponent} from "./feature/sign-in/sign-in.component";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
 import {FormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
