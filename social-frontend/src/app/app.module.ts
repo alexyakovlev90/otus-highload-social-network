@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 import {SignInLayoutComponent} from "./feature/sign-in/sign-in-layout.component";
 import {SignInComponent} from "./feature/sign-in/sign-in.component";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
 import {MatFormField, MatFormFieldControl, MatFormFieldModule} from "@angular/material/form-field";
 import {MatToolbarModule} from "@angular/material/toolbar";
-import { HomeComponent } from './feature/home/home.component';
+import { UserPageComponent } from './feature/user-page/user-page.component';
 import { SearchComponent } from './feature/search/search.component';
 import {AuthGuard} from "./auth/auth.guard";
 import {AuthService} from "./auth/auth.service";
@@ -30,26 +30,27 @@ import {MatSelectModule} from "@angular/material/select";
     MainLayoutComponent,
     SignInComponent,
     SignInLayoutComponent,
-    HomeComponent,
+    UserPageComponent,
     SearchComponent,
     CardComponent,
     SignUpComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatToolbarModule,
-    HttpClientModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatListModule,
-    MatSelectModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatToolbarModule,
+        HttpClientModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatListModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+    ],
   providers: [
     AuthGuard,
     AuthService

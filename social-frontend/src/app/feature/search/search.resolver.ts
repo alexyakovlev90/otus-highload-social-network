@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from "@angular/router";
-import {UserInfoItem} from "../user/user.model";
+import {UserInfoItem} from "../user-page/user.model";
 import {Observable} from "rxjs";
-import {UserService} from "../user/user.service";
+import {UserService} from "../user-page/user.service";
 import {ListResponse} from "../../shared/response.model";
 import {map} from "rxjs/operators";
 

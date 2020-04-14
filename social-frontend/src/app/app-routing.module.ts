@@ -4,10 +4,10 @@ import {SignInLayoutComponent} from "./feature/sign-in/sign-in-layout.component"
 import {SignInComponent} from "./feature/sign-in/sign-in.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
-import {HomeComponent} from "./feature/home/home.component";
+import {UserPageComponent} from "./feature/user-page/user-page.component";
 import {SearchComponent} from "./feature/search/search.component";
 import {SignUpComponent} from "./feature/sign-up/sign-up.component";
-import {HomeResolver} from "./feature/home/home.resolver";
+import {UserResolver} from "./feature/user-page/user.resolver";
 import {SearchResolver} from "./feature/search/search.resolver";
 
 
@@ -19,8 +19,12 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: '/home', pathMatch: 'full'},
       {
-        path: 'home', component: HomeComponent,
-        resolve: {body: HomeResolver}
+        path: 'home', component: UserPageComponent,
+        resolve: {body: UserResolver}
+      },
+      {
+        path: 'user/:login', component: UserPageComponent,
+        resolve: {body: UserResolver}
       },
       {
         path: 'search', component: SearchComponent,

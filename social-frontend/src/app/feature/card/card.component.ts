@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserInfoItem} from "../user/user.model";
+import {UserInfoItem} from "../user-page/user.model";
 
 @Component({
   selector: 'app-card',

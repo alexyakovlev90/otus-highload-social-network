@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../user/user.service";
-import {UserInfoItem} from "../user/user.model";
+import {UserService} from "./user.service";
+import {UserInfoItem} from "./user.model";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  templateUrl: './user-page.component.html',
+  styleUrls: ['./user-page.component.css']
 })
-export class HomeComponent implements OnInit {
+export class UserPageComponent implements OnInit {
 
   user: UserInfoItem;
 
@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(item => {
       this.user = item.body
+    },
+      errorResponse => {
+      this.router.navigate(['/home'], {queryParams: null})
     });
   }
 

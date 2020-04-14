@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {ListResponse, ObjectResponse} from "../../shared/response.model";
@@ -18,6 +18,18 @@ export class UserService {
 
   getById(id: number): Observable<ObjectResponse<UserInfoItem>> {
     return this.httpClient.get<ObjectResponse<UserInfoItem>>(`${UserService.apiUrl()}/${id}`);
+  }
+
+  getByLogin(login: string): Observable<ObjectResponse<UserInfoItem>> {
+    const params = {
+      params: new HttpParams()
+        .set('login', login)
+    };
+    return this.httpClient.get<ObjectResponse<UserInfoItem>>(`${UserService.apiUrl()}/login`, params);
+  }
+
+  getAuthUser(): Observable<ObjectResponse<UserInfoItem>> {
+    return this.httpClient.get<ObjectResponse<UserInfoItem>>(`${UserService.apiUrl()}/auth`);
   }
 
   getAll(): Observable<ListResponse<UserInfoItem>> {

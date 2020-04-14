@@ -1,44 +1,47 @@
 <div class="signup-container">
-  <mat-form-field appearance="fill" [floatLabel]="'auto'">
-    <mat-label>Login</mat-label>
-    <input matInput placeholder="Type your login">
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill" [floatLabel]="'auto'">
-    <mat-label>Password</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill" [floatLabel]="'auto'">
-    <mat-label>First Name</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill" [floatLabel]="'auto'">
-    <mat-label>Last Name</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill" [floatLabel]="'auto'">
-    <mat-label>Age</mat-label>
-    <input matInput>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Sex</mat-label>
-    <mat-select>
-      <mat-option value="male">MALE</mat-option>
-      <mat-option value="female">FEMALE</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill">
-    <mat-label>Interests</mat-label>
-    <textarea matInput placeholder="Tell something about you"></textarea>
-  </mat-form-field>
-  <br>
-  <mat-form-field appearance="fill" [floatLabel]="'auto'">
-    <mat-label>City</mat-label>
-    <input matInput>
-  </mat-form-field>
+    <mat-form-field appearance="fill" [floatLabel]="'auto'">
+      <mat-label>Login</mat-label>
+      <input matInput type="text" placeholder="Type your login" [(ngModel)]="newUser.login">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" [floatLabel]="'auto'">
+      <mat-label>Password</mat-label>
+      <input matInput type="text" placeholder="Type your password" [(ngModel)]="newUser.password">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" [floatLabel]="'auto'">
+      <mat-label>First Name</mat-label>
+      <input matInput type="text" placeholder="Type your first name" [(ngModel)]="newUser.firstName">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" [floatLabel]="'auto'">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="text" placeholder="Type your last name" [(ngModel)]="newUser.lastName">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" [floatLabel]="'auto'">
+      <mat-label>Age</mat-label>
+      <input matInput type="number" placeholder="Type your age" [(ngModel)]="newUser.age">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Sex</mat-label>
+      <mat-select placeholder="Your sex" [(ngModel)]="newUser.sex">
+        <mat-option value="true">MALE</mat-option>
+        <mat-option value="false">FEMALE</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Interests</mat-label>
+      <textarea [(ngModel)]="newUser.interest" matInput maxlength="200" name="interest"
+                placeholder="Tell something about you"
+                rows="3"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" [floatLabel]="'auto'">
+      <mat-label>City</mat-label>
+      <input matInput type="text" placeholder="Type your city" [(ngModel)]="newUser.city">
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="doRegister()">Register</button>
 </div>

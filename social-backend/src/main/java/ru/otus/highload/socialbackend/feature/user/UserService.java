@@ -20,4 +20,13 @@ public class UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    public User getByLogin(String login) {
+        return userRepository.getByLogin(login)
+                .orElseThrow(RuntimeException::new);
+    }
 }

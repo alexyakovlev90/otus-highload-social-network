@@ -3,12 +3,10 @@ package ru.otus.highload.socialbackend.feature.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.highload.socialbackend.auth.SecurityService;
 import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.rest.response.ListResponse;
 import ru.otus.highload.socialbackend.rest.response.Response;
-
-import java.net.URISyntaxException;
-import java.util.List;
 
 
 @RestController
@@ -17,31 +15,16 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final SecurityService securityService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User userDto) throws URISyntaxException {
-//        log.debug("REST request to save Factory : {}", factoryDTO);
-//        if (factoryDTO.getId() != null) {
-//            throw new BadRequestAlertException("A new factory cannot already have an ID", ENTITY_NAME, "idexists");
-//        }
-//        FactoryDTO result = factoryService.save(factoryDTO);
-//        return ResponseEntity.created(new URI("/api/factories/" + result.getId()))
-//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-//            .body(result);
-        return null;
+    public Response<User> createUser(@RequestBody User user) {
+        return new Response<>(userService.save(user));
     }
 
-    @PutMapping
-    public ResponseEntity<User> updateUser(@RequestBody User userDto) throws URISyntaxException {
-//        log.debug("REST request to update Factory : {}", factoryDTO);
-//        if (factoryDTO.getId() == null) {
-//            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-//        }
-//        FactoryDTO result = factoryService.save(factoryDTO);
-//        return ResponseEntity.ok()
-//            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, factoryDTO.getId().toString()))
-//            .body(result);
-        return null;
+    @PutMapping("/{id}")
+    public Response<User> updateUser(@RequestBody User user) {
+        return new Response<>(userService.save(user));
     }
 
     @GetMapping
@@ -52,6 +35,18 @@ public class UserController {
     @GetMapping("/{id}")
     public Response<User> getUser(@PathVariable Long id) {
         return new Response<>(userService.getById(id));
+    }
+
+    @GetMapping("/login")
+    public Response<User> getUserByLogin(@RequestParam("login") String login) {
+        return new Response<>(userService.getByLogin(login));
+    }
+
+    @GetMapping("/auth")
+    public Response<User> getAuthUser() {
+        User authUser = securityService.getAuthUser()
+                .orElseGet(() -> userService.getById(1L));
+        return new Response<>(authUser);
     }
 
     @DeleteMapping("/{id}")
