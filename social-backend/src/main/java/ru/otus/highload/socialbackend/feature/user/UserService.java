@@ -2,8 +2,10 @@ package ru.otus.highload.socialbackend.feature.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.otus.highload.socialbackend.auth.PasswordUtils;
 import ru.otus.highload.socialbackend.domain.User;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Service
@@ -22,6 +24,11 @@ public class UserService {
     }
 
     public User save(User user) {
+        String password = user.getPassword();
+        if (password != null) {
+            String securePassword = PasswordUtils.generateSecurePassword(password, PasswordUtils.SALT);
+            user.setPassword(securePassword);
+        }
         return userRepository.save(user);
     }
 

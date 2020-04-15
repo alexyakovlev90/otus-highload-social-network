@@ -12,6 +12,7 @@ import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.feature.user.UserRepository;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -31,23 +32,19 @@ public class AuthManager implements AuthenticationManager {
             throw new RuntimeException("Cannot find login information in authentication given.");
         }
 
-
         String login = auth.getPrincipal().toString();
-
         Optional<User> maybeUser = userRepository.getByLogin(login);
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
-            // todo check password
-            Optional<UsernamePasswordAuthenticationToken> authToken =
-                    Optional.of(new UsernamePasswordAuthenticationToken(user, auth.getCredentials(), Collections.emptyList()));
-            return authToken.get();
+            @NotNull String userPassword = user.getPassword();
+            String providedPassword = auth.getCredentials().toString();
+            boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, userPassword, PasswordUtils.SALT);
 
-//            if ("user".equals(login)) {
-//                return new UsernamePasswordAuthenticationToken("user", "user");
-//            } else {
-//                throw new BadCredentialsException("AuthenticatioError.pass.incorrect");
-//            }
-
+            if (passwordMatch) {
+                Optional<UsernamePasswordAuthenticationToken> authToken =
+                        Optional.of(new UsernamePasswordAuthenticationToken(user, auth.getCredentials(), Collections.emptyList()));
+                return authToken.get();
+            }
         }
         throw new BadCredentialsException("AuthenticatioError.pass.incorrect");
 
