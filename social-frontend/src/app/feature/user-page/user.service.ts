@@ -28,10 +28,6 @@ export class UserService {
     return this.httpClient.get<ObjectResponse<UserInfoItem>>(`${UserService.apiUrl()}/login`, params);
   }
 
-  getAuthUser(): Observable<ObjectResponse<UserInfoItem>> {
-    return this.httpClient.get<ObjectResponse<UserInfoItem>>(`${UserService.apiUrl()}/auth`);
-  }
-
   getAll(): Observable<ListResponse<UserInfoItem>> {
     return this.httpClient.get<ListResponse<UserInfoItem>>(`${UserService.apiUrl()}`);
   }

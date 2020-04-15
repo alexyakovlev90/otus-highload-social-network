@@ -14,7 +14,7 @@ public class UserService {
 
     public User getById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+                .orElse(null);
     }
 
     public List<User> getAll() {
@@ -27,6 +27,6 @@ public class UserService {
 
     public User getByLogin(String login) {
         return userRepository.getByLogin(login)
-                .orElseThrow(RuntimeException::new);
+                .orElse(null);
     }
 }

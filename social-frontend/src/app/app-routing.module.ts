@@ -5,10 +5,10 @@ import {SignInComponent} from "./feature/sign-in/sign-in.component";
 import {AuthGuard} from "./auth/auth.guard";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
 import {UserPageComponent} from "./feature/user-page/user-page.component";
-import {SearchComponent} from "./feature/search/search.component";
+import {UserListComponent} from "./feature/user-list/user-list.component";
 import {SignUpComponent} from "./feature/sign-up/sign-up.component";
 import {UserResolver} from "./feature/user-page/user.resolver";
-import {SearchResolver} from "./feature/search/search.resolver";
+import {UserListResolver} from "./feature/user-list/user-list.resolver";
 
 
 const routes: Routes = [
@@ -17,9 +17,9 @@ const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      {path: '', redirectTo: '/home', pathMatch: 'full'},
+      {path: '', redirectTo: '/user', pathMatch: 'full'},
       {
-        path: 'home', component: UserPageComponent,
+        path: 'user', component: UserPageComponent,
         resolve: {body: UserResolver}
       },
       {
@@ -27,12 +27,13 @@ const routes: Routes = [
         resolve: {body: UserResolver}
       },
       {
-        path: 'search', component: SearchComponent,
-        resolve: {body: SearchResolver}
+        path: 'search', component: UserListComponent,
+        resolve: {body: UserListResolver}
       },
-      {path: 'signup', component: SignUpComponent},
+      // { path: '**', redirectTo: 'user' }
     ]
   },
+  {path: 'signup', component: SignUpComponent},
   {
     path: '', component: SignInLayoutComponent, children: [
       {path: 'signin', component: SignInComponent}

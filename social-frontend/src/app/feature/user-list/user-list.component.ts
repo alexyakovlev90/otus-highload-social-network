@@ -5,10 +5,10 @@ import {UserService} from "../user-page/user.service";
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
-export class SearchComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router, private userService: UserService) { }

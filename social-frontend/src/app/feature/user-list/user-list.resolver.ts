@@ -10,7 +10,7 @@ import {map} from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class SearchResolver implements Resolve<UserInfoItem[]> {
+export class UserListResolver implements Resolve<UserInfoItem[]> {
 
   constructor(private userService: UserService) {
   }

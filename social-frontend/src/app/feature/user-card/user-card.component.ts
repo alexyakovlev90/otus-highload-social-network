@@ -3,10 +3,10 @@ import {UserInfoItem} from "../user-page/user.model";
 
 @Component({
   selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  templateUrl: './user-card.component.html',
+  styleUrls: ['./user-card.component.css']
 })
-export class CardComponent implements OnInit {
+export class UserCardComponent implements OnInit {
 
   @Input() user: UserInfoItem;
 

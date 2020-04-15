@@ -1,6 +1,6 @@
 package ru.otus.highload.socialbackend.config;
 
-import ru.otus.highload.socialbackend.auth.AdminAuthManager;
+import ru.otus.highload.socialbackend.auth.AuthManager;
 import ru.otus.highload.socialbackend.rest.response.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private ObjectMapper objectMapper;
 
     @Resource
-    private AdminAuthManager adminAuthManager;
+    private AuthManager authManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -76,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.parentAuthenticationManager(adminAuthManager);
+        auth.parentAuthenticationManager(authManager);
     }
 
 }
