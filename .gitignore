@@ -34,6 +34,7 @@ build/
 # Node
 ######################
 /node/
+dist/
 node_tmp/
 node_modules/
 npm-debug.log.*
