@@ -41,11 +41,11 @@ export class AuthService {
   }
 
   private checkLoggedIn() {
-    return this.httpClient.get<ObjectResponse<any>>(
-      "/api/security")
+    return this.httpClient.get<ObjectResponse<any>>("/api/security")
       .pipe(
-        map(next => next.result === "success", error => false),
-        catchError(err => Observable.throw(err))
+        map(
+          next => next.result === "success",
+            error => this.logout())
       )
   }
 

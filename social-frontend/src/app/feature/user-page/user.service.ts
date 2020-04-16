@@ -36,7 +36,7 @@ export class UserService {
     if (user.id) {
       return this.httpClient.put<ObjectResponse<UserInfoItem>>(`${UserService.apiUrl()}/${user.id}`, user);
     } else {
-      return this.httpClient.post<ObjectResponse<UserInfoItem>>(UserService.apiUrl(), user);
+      return this.httpClient.post<ObjectResponse<UserInfoItem>>(`${UserService.apiUrl()}/reg`, user);
     }
   }
 

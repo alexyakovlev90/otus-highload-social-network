@@ -9,8 +9,9 @@
       </a>
     </mat-card-title>
     <mat-card-subtitle>{{user.login}}</mat-card-subtitle>
-    <div class="user-action">
-      <button mat-button>ADD</button>
+    <div class="user-action" *ngIf="!user.loggedIn">
+      <button *ngIf="!user.friend" (click)="addFriend(user.id)" mat-button>ADD</button>
+      <label *ngIf="user.friend">FRIEND</label>
     </div>
   </mat-card-header>
 </mat-card>

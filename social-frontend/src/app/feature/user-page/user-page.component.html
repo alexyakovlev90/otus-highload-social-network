@@ -9,8 +9,8 @@
   </div>
   <mat-divider></mat-divider>
   <mat-card-actions align="center">
-    <button mat-raised-button color="accent">Add to friends</button>
-    <button mat-raised-button color="accent">Show friends</button>
+    <button mat-raised-button color="accent" *ngIf="!user.loggedIn" (click)="addFriend(user.id)" [disabled]="user.friend">Add to friends</button>
+    <button mat-raised-button color="accent" (click)="showFriends()">Show friends</button>
   </mat-card-actions>
   <mat-card-content>
     <mat-list>

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "./user.service";
 import {UserInfoItem} from "./user.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../auth/auth.service";
+import {FriendRequestService} from "../friend-request/friend-request.service";
 
 @Component({
   selector: 'app-home',
@@ -13,8 +13,10 @@ export class UserPageComponent implements OnInit {
 
   user: UserInfoItem;
 
+
   constructor(private route: ActivatedRoute,
-              private router: Router, private authService: AuthService) {
+              private router: Router, private authService: AuthService,
+              private friendRequestService: FriendRequestService) {
   }
 
   ngOnInit(): void {
@@ -28,6 +30,15 @@ export class UserPageComponent implements OnInit {
         this.authService.logout();
         console.log(errorResponse);
       });
+
   }
 
+  showFriends() {
+    this.router.navigate(['friends/' + this.user.id])
+  }
+
+  addFriend(userId: number) {
+    this.friendRequestService.addFriend(userId)
+      .subscribe(resp => this.user.friend = true )
+  }
 }

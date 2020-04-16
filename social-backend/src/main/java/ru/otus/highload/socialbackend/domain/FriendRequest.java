@@ -18,13 +18,13 @@ public class FriendRequest {
     private Long id;
 
     @Column(name = "USER_ID")
-    private Long fromUserId;
+    private Long userId;
 
     @Column(name = "FRIEND_ID")
-    private Long toUserId;
+    private Long friendId;
 
-    public FriendRequest(Long fromUserId, Long toUserId) {
-        this.fromUserId = fromUserId;
-        this.toUserId = toUserId;
+    public FriendRequest(Long userId, Long friendId) {
+        this.userId = userId;
+        this.friendId = friendId;
     }
 }

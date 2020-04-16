@@ -8,6 +8,9 @@ export interface UserInfoItem {
   interest: string;
   city: string;
   registerDate: Date;
+
+  friend?: boolean;
+  loggedIn?: boolean;
 }
 
 export interface UserUpdateItem {

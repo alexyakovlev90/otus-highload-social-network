@@ -15,7 +15,7 @@ import {UserPageComponent} from './feature/user-page/user-page.component';
 import {UserListComponent} from './feature/user-list/user-list.component';
 import {AuthGuard} from "./auth/auth.guard";
 import {AuthService} from "./auth/auth.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDividerModule} from "@angular/material/divider";
@@ -23,6 +23,7 @@ import {MatListModule} from "@angular/material/list";
 import {UserCardComponent} from './feature/user-card/user-card.component';
 import {SignUpComponent} from './feature/sign-up/sign-up.component';
 import {MatSelectModule} from "@angular/material/select";
+import {AuthExpiredInterceptor} from "./auth/auth-expired.interceptor";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,11 @@ import {MatSelectModule} from "@angular/material/select";
         ReactiveFormsModule,
     ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpiredInterceptor,
+      multi: true
+    },
     AuthGuard,
     AuthService
   ],

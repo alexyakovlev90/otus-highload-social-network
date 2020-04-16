@@ -2,42 +2,19 @@ package ru.otus.highload.socialbackend.feature.friend_request;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.feature.user.UserRepository;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import ru.otus.highload.socialbackend.feature.security.SecurityService;
 
 @Service
 @RequiredArgsConstructor
 public class FriendRequestService {
 
     private final FriendRequestRepository friendRequestRepository;
-    private final UserRepository userRepository;
+    private final SecurityService securityService;
 
-    public List<User> getUserFriends(Long userId) {
-        List<FriendRequest> userFriends = friendRequestRepository.getUserFriends(userId);
-
-        List<Long> fromUserIds = userFriends.stream()
-                .map(FriendRequest::getFromUserId)
-                .collect(Collectors.toList());
-
-        List<Long> toUserIds = userFriends.stream()
-                .map(FriendRequest::getToUserId)
-                .collect(Collectors.toList());
-
-        return Stream.concat(fromUserIds.stream(), toUserIds.stream())
-                .distinct()
-                .map(userRepository::findById)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .collect(Collectors.toList());
-
-    }
-
+    @Transactional
     public FriendRequest addUserFriend(Long from, Long to) {
         FriendRequest friendRequest = friendRequestRepository.getByFromUserIdAndToUserId(from, to);
         if (friendRequest == null) {
@@ -47,7 +24,21 @@ public class FriendRequestService {
         return friendRequest;
     }
 
+    @Transactional
+    public FriendRequest addFriend(Long userId) {
+        return securityService.getAuthUser()
+                .map(User::getId)
+                .map(authUserId -> this.addUserFriend(authUserId, userId))
+                .orElse(null);
+    }
+
     public boolean areFriends(Long from, Long to) {
         return friendRequestRepository.getByFromUserIdAndToUserId(from, to) != null;
+    }
+
+    public boolean isFriend(Long userId) {
+        return securityService.getAuthUser()
+                .map(user -> this.areFriends(user.getId(), userId))
+                .orElse(false);
     }
 }

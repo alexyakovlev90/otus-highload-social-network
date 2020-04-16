@@ -1,5 +1,7 @@
 package ru.otus.highload.socialbackend.auth;
 
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,12 +20,12 @@ import java.util.Optional;
 
 
 @Service
+@RequiredArgsConstructor
 public class AuthManager implements AuthenticationManager {
 
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(AuthManager.class);
 
-    @Resource
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     @Transactional
@@ -41,9 +43,8 @@ public class AuthManager implements AuthenticationManager {
             boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, userPassword, PasswordUtils.SALT);
 
             if (passwordMatch) {
-                Optional<UsernamePasswordAuthenticationToken> authToken =
-                        Optional.of(new UsernamePasswordAuthenticationToken(user, auth.getCredentials(), Collections.emptyList()));
-                return authToken.get();
+                logger.info("User {} logged in", user.getLogin());
+                return new UsernamePasswordAuthenticationToken(user, auth.getCredentials(), Collections.emptyList());
             }
         }
         throw new BadCredentialsException("AuthenticatioError.pass.incorrect");

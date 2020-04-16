@@ -3,14 +3,10 @@ package ru.otus.highload.socialbackend.feature.friend_request;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
-import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.feature.security.SecurityService;
+import ru.otus.highload.socialbackend.feature.user.UserInfoItemDto;
+import ru.otus.highload.socialbackend.feature.user.UserService;
 import ru.otus.highload.socialbackend.rest.response.ListResponse;
 import ru.otus.highload.socialbackend.rest.response.Response;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,36 +14,20 @@ import java.util.Optional;
 public class FriendRequestController {
 
     private final FriendRequestService friendRequestService;
-    private final SecurityService securityService;
+    private final UserService userService;
 
     @GetMapping
-    public ListResponse<User> getUserFriends(@RequestParam("userId") Long userId) {
-        List<User> userFriends;
+    public ListResponse<UserInfoItemDto> getUserFriends(@RequestParam("userId") Long userId) {
         if (userId != null) {
-            userFriends = friendRequestService.getUserFriends(userId);
+            return new ListResponse<>(userService.getUserFriends(userId));
         } else {
-            userFriends = securityService.getAuthUser()
-                    .map(User::getId)
-                    .map(friendRequestService::getUserFriends)
-                    .orElse(Collections.emptyList());
+            return new ListResponse<>(userService.getAuthUserFriends());
         }
-        return new ListResponse<>(userFriends);
     }
 
     @PostMapping
-    public Response<FriendRequest> addFriend(@RequestParam("fromUserId") Long fromUserId,
-                                             @RequestParam("toUserId") Long toUserId,
-                                             @RequestParam("userId") Long userId) {
-        FriendRequest friendRequest;
-        if (userId != null) {
-            friendRequest = securityService.getAuthUser()
-                    .map(User::getId)
-                    .map(authUserId -> friendRequestService.addUserFriend(authUserId, userId))
-                    .orElse(null);
-        } else {
-            friendRequest = friendRequestService.addUserFriend(fromUserId, toUserId);
-        }
-        return new Response<>(friendRequest);
+    public Response<FriendRequest> addFriend(@RequestParam("userId") Long userId) {
+        return new Response<>(friendRequestService.addFriend(userId));
     }
 
     @GetMapping("/check")
@@ -60,11 +40,8 @@ public class FriendRequestController {
 
     @GetMapping("/is-friend")
     public Response<Boolean> isFriend(@RequestParam("userId") Long userId) {
-        Boolean isFriend = securityService.getAuthUser()
-                .map(user -> friendRequestService.areFriends(user.getId(), userId))
-                .orElse(false);
         Response<Boolean> response = new Response<>();
-        response.setData(isFriend);
+        response.setData(friendRequestService.isFriend(userId));
         return response;
     }
 }

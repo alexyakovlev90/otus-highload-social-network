@@ -8,7 +8,8 @@ import {UserPageComponent} from "./feature/user-page/user-page.component";
 import {UserListComponent} from "./feature/user-list/user-list.component";
 import {SignUpComponent} from "./feature/sign-up/sign-up.component";
 import {UserResolver} from "./feature/user-page/user.resolver";
-import {UserListResolver} from "./feature/user-list/user-list.resolver";
+import {SearchResolver} from "./feature/user-list/search.resolver";
+import {FriendsResolver} from "./feature/user-list/friends.resolver";
 
 
 const routes: Routes = [
@@ -28,9 +29,17 @@ const routes: Routes = [
       },
       {
         path: 'search', component: UserListComponent,
-        resolve: {body: UserListResolver}
+        resolve: {body: SearchResolver}
       },
-      // { path: '**', redirectTo: 'user' }
+      {
+        path: 'friends', component: UserListComponent,
+        resolve: {body: FriendsResolver}
+      },
+      {
+        path: 'friends/:userId', component: UserListComponent,
+        resolve: {body: FriendsResolver}
+      }
+      // { path: '**', redirectTo: '' }
     ]
   },
   {path: 'signup', component: SignUpComponent},
