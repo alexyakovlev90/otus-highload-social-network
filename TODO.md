@@ -12,3 +12,5 @@
 11. Перевезти проект на MySQL
 12. Деплой на AWS
   - https://aws.amazon.com/ru/getting-started/tutorials/launch-a-virtual-machine/
+  
+~~13. Сделать доступным swagger чз nginx на /api/swagger-ui.html~~
