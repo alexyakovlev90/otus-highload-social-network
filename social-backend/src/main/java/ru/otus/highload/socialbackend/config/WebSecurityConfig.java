@@ -33,11 +33,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/reg").permitAll()
                 //swagger
 //                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/api/swagger-ui.html").permitAll()
-                .antMatchers("/api/documentation/swagger/**").permitAll()
-                .antMatchers("/api/webjars/**").permitAll()
-                .antMatchers("/api/swagger-resources/**").permitAll()
-                .antMatchers("/api/v2/api-docs/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/documentation/swagger/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/v2/api-docs/**").permitAll()
+//                .antMatchers("/api/swagger-ui.html").permitAll()
+//                .antMatchers("/api/documentation/swagger/**").permitAll()
+//                .antMatchers("/api/webjars/**").permitAll()
+//                .antMatchers("/api/swagger-resources/**").permitAll()
+//                .antMatchers("/api/v2/api-docs/**").permitAll()
                 .anyRequest().authenticated();
 //                .anyRequest().permitAll();
 

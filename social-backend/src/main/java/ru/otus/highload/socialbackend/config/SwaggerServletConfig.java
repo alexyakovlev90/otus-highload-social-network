@@ -9,14 +9,14 @@ import org.springframework.web.servlet.DispatcherServlet;
 @Configuration
 public class SwaggerServletConfig {
 
-    @Bean
-    public ServletRegistrationBean apiServlet() {
-        DispatcherServlet dispatcherServlet = new DispatcherServlet();
-        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
-        applicationContext.register(SwaggerConfig.class);
-        dispatcherServlet.setApplicationContext(applicationContext);
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet, "/api/*");
-        servletRegistrationBean.setName("api");
-        return servletRegistrationBean;
-    }
+//    @Bean
+//    public ServletRegistrationBean apiServlet() {
+//        DispatcherServlet dispatcherServlet = new DispatcherServlet();
+//        AnnotationConfigWebApplicationContext applicationContext = new AnnotationConfigWebApplicationContext();
+//        applicationContext.register(SwaggerConfig.class);
+//        dispatcherServlet.setApplicationContext(applicationContext);
+//        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(dispatcherServlet, "/api/*");
+//        servletRegistrationBean.setName("api");
+//        return servletRegistrationBean;
+//    }
 }
