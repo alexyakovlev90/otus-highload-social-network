@@ -6,7 +6,7 @@
 ~~6. Добавить кнопку домой~~
 ~~7. Привести в порядок авторизацию~~
 ~~8. Запаковка в докер~~
-9. Пуш докер образа в docker registry
+~~9. Пуш докер образа в docker registry~~
 10. Развернуть MySQL в AWS
   - https://aws.amazon.com/ru/getting-started/tutorials/create-mysql-db/
 11. Перевезти проект на MySQL
