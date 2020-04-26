@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Accessors(chain = true)
 @EqualsAndHashCode(of = "id")
 @Table(name = "USER")
 public class User implements Serializable {
