@@ -8,7 +8,7 @@ request = function()
     }
     -- define the path that will search for q=%v 9%v being a random number between 0 and 1000)
     local queryStr = array[math.random(32)] .. array[math.random(32)] .. array[math.random(32)]
-    local url_path = "/api/user/search?q=" .. encodeURI(queryStr)
+    local url_path = "/api/users/search?firstName=" .. encodeURI(queryStr) .. "&lastName=" .. encodeURI(queryStr)
     -- if we want to print the path generated
 --    print(url_path)
     -- Return the request object with the current URL path

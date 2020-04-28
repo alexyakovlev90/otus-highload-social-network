@@ -7,6 +7,8 @@ import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.rest.response.ListResponse;
 import ru.otus.highload.socialbackend.rest.response.Response;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -38,6 +40,13 @@ public class UserController {
     @GetMapping("/login")
     public Response<UserInfoItemDto> getUserByLogin(@RequestParam("login") String login) {
         return new Response<>(userService.getByLogin(login));
+    }
+
+    @GetMapping("/search")
+    public ListResponse<UserInfoItemDto> getUser(@RequestParam("firstName") String firstName,
+                                                 @RequestParam(value = "lastName", required = false) String lastName) {
+        List<UserInfoItemDto> users = userService.searchUser(firstName, lastName);
+        return new ListResponse<>(users);
     }
 
     @DeleteMapping("/{id}")

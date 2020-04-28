@@ -1,6 +1,8 @@
 package ru.otus.highload.socialbackend.feature.user;
 
+import antlr.StringUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.auth.PasswordUtils;
@@ -10,6 +12,7 @@ import ru.otus.highload.socialbackend.feature.friend_request.FriendRequestReposi
 import ru.otus.highload.socialbackend.feature.friend_request.FriendRequestService;
 import ru.otus.highload.socialbackend.feature.security.SecurityService;
 
+import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -100,5 +103,26 @@ public class UserService {
         boolean friend = friendRequestService.isFriend(user.getId());
         return itemDto
                 .setFriend(friend);
+    }
+
+    public List<UserInfoItemDto> searchUser(String firstName, String lastName) {
+        String lastNameLike;
+        if (lastName == null) {
+            lastNameLike = "%";
+        } else {
+            lastNameLike = capitalize(lastName) + "$";
+        }
+        String firstNameLike = capitalize(firstName) +  "%";
+        return userRepository.getByFirstNameAndLastName(firstNameLike, lastNameLike).stream()
+                .map(userInfoItemDtoConverter::convert)
+                .collect(Collectors.toList());
+    }
+
+    public static String capitalize(String str) {
+        if(str == null || str.isEmpty()) {
+            return str;
+        }
+
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 }
