@@ -27,3 +27,16 @@
 ~~6. Построить подходящий индекс.~~
 ~~7. Построить графики и сохранить их в отчет~~
 ~~8. Написать отчет~~
+
+#HW#4
+~~1. Поднять cAdvisor и prometheus для мониторинга контейнеров~~
+  - https://prometheus.io/docs/guides/cadvisor/
+~~2. Прикрутить графану и дашборд для отображения метрик~~
+  - https://github.com/vegasbrianc/prometheus
+  - его дашборды https://grafana.com/grafana/dashboards/893
+  - Есть еще "полный фарш" https://github.com/stefanprodan/dockprom 
+  - статья автора на Хабре https://habr.com/ru/company/southbridge/blog/314212/.
+3. Выбрать 2 запроса для тестирования, изменить для них датасорс
+4. Поднять с docker-compose мастер-слейв с mysql 5.7
+  - https://github.com/vbabak/docker-mysql-master-slave
+5. Протестировать нагрузку, записать в отчет

@@ -1,0 +1,68 @@
+version: '3.3'
+services:
+  prometheus:
+    image: prom/prometheus:v2.18.0-rc.1
+    container_name: prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=1d'
+    networks:
+      - prom_net
+    depends_on:
+      - cadvisor
+
+  node-exporter:
+    image: prom/node-exporter:v0.15.2
+    container_name: prom-node-exporter
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+    networks:
+      - prom_net
+    depends_on:
+      - prometheus
+
+  cadvisor:
+    image: google/cadvisor:v0.29.0
+    container_name: cadvisor
+    volumes:
+      - '/:/rootfs:ro'
+      - '/var/run:/var/run:rw'
+      - '/sys:/sys:ro'
+      - '/var/lib/docker/:/var/lib/docker:ro'
+    ports:
+      - '8080:8080'
+    networks:
+      - prom_net
+
+  grafana:
+    image: grafana/grafana:5.0.0
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    networks:
+      - prom_net
+
+volumes:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  prom_net:
