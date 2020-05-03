@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.repository.slave.UserRepository;
+import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
@@ -24,7 +24,7 @@ public class AuthManager implements AuthenticationManager {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthManager.class);
 
-    private final UserRepository userRepository;
+    private final UserMasterRepository userMasterRepository;
 
     @Override
     @Transactional
@@ -34,7 +34,7 @@ public class AuthManager implements AuthenticationManager {
         }
 
         String login = auth.getPrincipal().toString();
-        Optional<User> maybeUser = userRepository.getByLogin(login);
+        Optional<User> maybeUser = userMasterRepository.getByLogin(login);
         if (maybeUser.isPresent()) {
             User user = maybeUser.get();
             @NotNull String userPassword = user.getPassword();

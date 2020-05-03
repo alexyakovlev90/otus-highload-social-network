@@ -6,21 +6,23 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.feature.security.SecurityService;
-import ru.otus.highload.socialbackend.repository.slave.FriendRequestRepository;
+import ru.otus.highload.socialbackend.repository.master.FriendRequestMasterRepository;
+import ru.otus.highload.socialbackend.repository.slave.FriendRequestSlaveRepository;
 
 @Service
 @RequiredArgsConstructor
 public class FriendRequestService {
 
-    private final FriendRequestRepository friendRequestRepository;
+    private final FriendRequestSlaveRepository friendRequestSlaveRepository;
+    private final FriendRequestMasterRepository friendRequestMasterRepository;
     private final SecurityService securityService;
 
     @Transactional
     public FriendRequest addUserFriend(Long from, Long to) {
-        FriendRequest friendRequest = friendRequestRepository.getByFromUserIdAndToUserId(from, to);
+        FriendRequest friendRequest = friendRequestSlaveRepository.getByFromUserIdAndToUserId(from, to);
         if (friendRequest == null) {
             var newFriendRequest = new FriendRequest(from, to);
-            return friendRequestRepository.save(newFriendRequest);
+            return friendRequestMasterRepository.save(newFriendRequest);
         }
         return friendRequest;
     }
@@ -34,7 +36,7 @@ public class FriendRequestService {
     }
 
     public boolean areFriends(Long from, Long to) {
-        return friendRequestRepository.getByFromUserIdAndToUserId(from, to) != null;
+        return friendRequestSlaveRepository.getByFromUserIdAndToUserId(from, to) != null;
     }
 
     public boolean isFriend(Long userId) {

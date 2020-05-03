@@ -6,19 +6,21 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.repository.slave.UserRepository;
+import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Component
 @Log4j2
 @RequiredArgsConstructor
 public class ApplicationStart implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final UserRepository userRepository;
+    private final UserMasterRepository userMasterRepository;
 
     private final List<String> names = Arrays.asList(
             "Александр", "Алексей", "Анатолий", "Андрей", "Антон", "Аркадий", "Артем", "Борислав", "Вадим", "Валентин",
@@ -35,13 +37,14 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-//        for (int i = 0; i < 1000; i++) {
+        int USERS_TO_CREATE = 10;
+//        for (int i = 0; i < USERS_TO_CREATE; i++) {
 //            final int m = i;
-//            List<User> users = IntStream.range(0, 1000)
-//                    .mapToObj(j -> newRandomUser(j + m * 1000))
+//            List<User> users = IntStream.range(0, USERS_TO_CREATE)
+//                    .mapToObj(j -> newRandomUser(j + m * USERS_TO_CREATE))
 //                    .collect(Collectors.toList());
-//            userRepository.saveAll(users);
-//            log.info("{} users inserted",  i * 1000);
+//            userMasterRepository.saveAll(users);
+//            log.info("{} users inserted",  i * USERS_TO_CREATE);
 //        }
     }
 

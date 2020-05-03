@@ -10,17 +10,17 @@ import javax.persistence.*;
 @ToString
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
-@Table(name = "FRIEND_REQUEST")
+@Table(name = "friend_request")
 public class FriendRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USER_ID")
+    @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "FRIEND_ID")
+    @Column(name = "friend_id")
     private Long friendId;
 
     public FriendRequest(Long userId, Long friendId) {

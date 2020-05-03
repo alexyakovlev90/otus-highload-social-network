@@ -26,7 +26,7 @@
             <column name="sex" type="number(1,0)"/>
             <column name="interest" type="varchar(1024)"/>
             <column name="city" type="varchar(100)"/>
-            <column name="REGISTER_DATE" type="datetime"/>
+            <column name="register_date" type="datetime"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

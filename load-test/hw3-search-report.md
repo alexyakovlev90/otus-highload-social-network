@@ -18,7 +18,7 @@ SELECT * FROM user WHERE first_name like '%' and last_name like '%' LIMIT 100;
 ```shell script
 wrk -t1 -c1 -d5s -s ./load-test/wrk/search-test.lua --latency http://localhost:9090
 ```
-- Скрипт для генерации запросов на Lua [a relative link](wrk/search-test.lua)
+- [Скрипт для генерации запросов на Lua](wrk/search-test.lua)
 - Результаты
 ```
 Load    Requests/sec:	LatencyAvg  LatencyMax

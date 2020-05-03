@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.repository.slave;
+package ru.otus.highload.socialbackend.repository.master;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -9,13 +9,13 @@ import java.util.List;
 
 
 @Repository
-public interface FriendRequestRepository extends JpaRepository<FriendRequest, Long> {
+public interface FriendRequestMasterRepository extends JpaRepository<FriendRequest, Long> {
 
     @Query("SELECT fr FROM FriendRequest fr WHERE fr.userId = ?1 or fr.friendId = ?1")
     List<FriendRequest> getUserFriends(Long userId);
 
-    @Query(value= "SELECT * FROM FRIEND_REQUEST fr " +
-            " WHERE fr.USER_ID = ?1 and fr.FRIEND_ID = ?2 OR fr.USER_ID = ?2 and fr.FRIEND_ID = ?1 " +
+    @Query(value= "SELECT * FROM friend_request fr " +
+            " WHERE fr.user_id = ?1 and fr.friend_id = ?2 OR fr.user_id = ?2 and fr.friend_id = ?1 " +
             " LIMIT 1",
             nativeQuery = true)
     FriendRequest getByFromUserIdAndToUserId(Long fromUserId, Long toUserId);

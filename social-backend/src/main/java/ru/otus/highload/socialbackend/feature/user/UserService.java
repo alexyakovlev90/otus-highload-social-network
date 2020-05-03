@@ -6,10 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.auth.PasswordUtils;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.repository.slave.FriendRequestRepository;
+import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
+import ru.otus.highload.socialbackend.repository.slave.FriendRequestSlaveRepository;
 import ru.otus.highload.socialbackend.feature.friend_request.FriendRequestService;
 import ru.otus.highload.socialbackend.feature.security.SecurityService;
-import ru.otus.highload.socialbackend.repository.slave.UserRepository;
+import ru.otus.highload.socialbackend.repository.slave.UserSlaveRepository;
 
 import java.util.Collections;
 import java.util.Date;
@@ -22,20 +23,21 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserSlaveRepository userSlaveRepository;
+    private final UserMasterRepository userMasterRepository;
     private final UserInfoItemDtoConverter userInfoItemDtoConverter;
     private final FriendRequestService friendRequestService;
     private final SecurityService securityService;
-    private final FriendRequestRepository friendRequestRepository;
+    private final FriendRequestSlaveRepository friendRequestSlaveRepository;
 
     public UserInfoItemDto getById(Long id) {
-        return userRepository.findById(id)
+        return userMasterRepository.findById(id)
                 .map(this::convert)
                 .orElse(null);
     }
 
     public List<UserInfoItemDto> getAll() {
-        return userRepository.findAll().stream()
+        return userSlaveRepository.findAll().stream()
                 .map(this::convert)
                 .collect(Collectors.toList());
     }
@@ -48,7 +50,7 @@ public class UserService {
             user.setPassword(securePassword);
         }
         final Long isNew = user.getId();
-        User savedUser = userRepository.save(user);
+        User savedUser = userMasterRepository.save(user);
         if (isNew == null) {
             user.setRegisterDate(new Date());
             securityService.authenticate(savedUser);
@@ -57,7 +59,7 @@ public class UserService {
     }
 
     public UserInfoItemDto getByLogin(String login) {
-        return userRepository.getByLogin(login)
+        return userMasterRepository.getByLogin(login)
                 .map(this::convert)
                 .orElse(null);
     }
@@ -72,7 +74,7 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public List<UserInfoItemDto> getUserFriends(Long userId) {
-        List<FriendRequest> userFriends = friendRequestRepository.getUserFriends(userId);
+        List<FriendRequest> userFriends = friendRequestSlaveRepository.getUserFriends(userId);
 
         List<Long> fromUserIds = userFriends.stream()
                 .map(FriendRequest::getUserId)
@@ -84,7 +86,7 @@ public class UserService {
 
         List<UserInfoItemDto> friends = Stream.concat(fromUserIds.stream(), toUserIds.stream())
                 .distinct()
-                .map(userRepository::findById)
+                .map(userMasterRepository::findById)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .map(this::convert)
@@ -111,7 +113,7 @@ public class UserService {
             lastNameLike = capitalize(lastName) + "$";
         }
         String firstNameLike = capitalize(firstName) +  "%";
-        return userRepository.getByFirstNameAndLastName(firstNameLike, lastNameLike).stream()
+        return userSlaveRepository.getByFirstNameAndLastName(firstNameLike, lastNameLike).stream()
                 .map(userInfoItemDtoConverter::convert)
                 .collect(Collectors.toList());
     }
