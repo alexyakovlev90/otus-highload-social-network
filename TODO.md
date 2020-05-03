@@ -36,7 +36,8 @@
   - его дашборды https://grafana.com/grafana/dashboards/893
   - Есть еще "полный фарш" https://github.com/stefanprodan/dockprom 
   - статья автора на Хабре https://habr.com/ru/company/southbridge/blog/314212/.
-3. Выбрать 2 запроса для тестирования, изменить для них датасорс
-4. Поднять с docker-compose мастер-слейв с mysql 5.7
+~~4. Поднять с docker-compose мастер-слейв с mysql 5.7~~
   - https://github.com/vbabak/docker-mysql-master-slave
-5. Протестировать нагрузку, записать в отчет
+~~5. Изменить код на использование 2х датасорсов~~
+6. Выбрать 2 запроса для тестирования, изменить для них датасорс
+7. Протестировать нагрузку, записать в отчет

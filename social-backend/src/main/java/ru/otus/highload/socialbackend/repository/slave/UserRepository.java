@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.feature.user;
+package ru.otus.highload.socialbackend.repository.slave;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

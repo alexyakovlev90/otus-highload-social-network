@@ -36,29 +36,29 @@ public class User implements Serializable {
 //    @JsonIgnore
     @NotNull
 //    @Size(min = 60, max = 60)
-    @Column(name = "password_hash")
+    @Column(name = "PASSWORD_HASH")
     private String password;
 
     @Size(max = 50)
-    @Column(name = "first_name")
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
     @Size(max = 50)
-    @Column(name = "last_name")
+    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "age")
+    @Column(name = "AGE")
     private Integer age;
 
-    @Column(name = "sex")
+    @Column(name = "SEX")
     private Boolean sex;
 
     @Size(max = 1024)
-    @Column(name = "interest")
+    @Column(name = "INTEREST")
     private String interest;
 
     @Size(max = 100)
-    @Column(name = "city")
+    @Column(name = "CITY")
     private String city;
 
     @Column(name = "REGISTER_DATE")

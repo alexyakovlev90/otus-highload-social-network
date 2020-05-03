@@ -11,9 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.feature.user.UserRepository;
+import ru.otus.highload.socialbackend.repository.slave.UserRepository;
 
-import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Optional;

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.feature.security.SecurityService;
+import ru.otus.highload.socialbackend.repository.slave.FriendRequestRepository;
 
 @Service
 @RequiredArgsConstructor

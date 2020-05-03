@@ -2,19 +2,16 @@ package ru.otus.highload.socialbackend;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.feature.user.UserRepository;
+import ru.otus.highload.socialbackend.repository.slave.UserRepository;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Component
 @Log4j2

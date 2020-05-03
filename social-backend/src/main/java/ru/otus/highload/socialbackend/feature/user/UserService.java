@@ -1,18 +1,16 @@
 package ru.otus.highload.socialbackend.feature.user;
 
-import antlr.StringUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.auth.PasswordUtils;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.feature.friend_request.FriendRequestRepository;
+import ru.otus.highload.socialbackend.repository.slave.FriendRequestRepository;
 import ru.otus.highload.socialbackend.feature.friend_request.FriendRequestService;
 import ru.otus.highload.socialbackend.feature.security.SecurityService;
+import ru.otus.highload.socialbackend.repository.slave.UserRepository;
 
-import javax.sql.DataSource;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
