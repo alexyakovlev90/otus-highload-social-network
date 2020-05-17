@@ -1,7 +1,6 @@
 package ru.otus.highload.socialbackend.config.data;
 
 import liquibase.integration.spring.SpringLiquibase;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -11,14 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.sql.DataSource;
 
 @Configuration
-@RequiredArgsConstructor
 public class LiquibaseConfig {
-
-    @Qualifier("dataSourceSlave")
-    private final DataSource dataSourceSlave;
-
-    @Qualifier("dataSourceMaster")
-    private final DataSource dataSourceMaster;
 
     @Bean
     @ConfigurationProperties(prefix = "spring.liquibase")
@@ -26,13 +18,26 @@ public class LiquibaseConfig {
         return new LiquibaseProperties();
     }
 
-    @Bean("slaveLiquibase")
-    public SpringLiquibase slaveLiquibase() {
-        return springLiquibase(dataSourceSlave, liquibaseProperties());
-    }
+//    @Bean("slaveLiquibase")
+//    public SpringLiquibase slaveLiquibase(@Qualifier("dataSourceSlave") DataSource dataSourceSlave) {
+////        return springLiquibase(dataSourceSlave, liquibaseProperties());
+//        SpringLiquibase liquibase = new SpringLiquibase();
+//        liquibase.setDataSource(dataSourceSlave);
+//        liquibase.setChangeLog("classpath:liquibase/master.xml");
+//        return liquibase;
+//    }
+//
+//    @Bean("slave2Liquibase")
+//    public SpringLiquibase slave2Liquibase(@Qualifier("dataSourceSlave2") DataSource dataSourceSlave2) {
+////        return springLiquibase(dataSourceSlave, liquibaseProperties());
+//        SpringLiquibase liquibase = new SpringLiquibase();
+//        liquibase.setDataSource(dataSourceSlave2);
+//        liquibase.setChangeLog("classpath:liquibase/master.xml");
+//        return liquibase;
+//    }
 
     @Bean("masterLiquibase")
-    public SpringLiquibase masterLiquibase() {
+    public SpringLiquibase masterLiquibase(@Qualifier("dataSourceMaster") DataSource dataSourceMaster) {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSourceMaster);
         liquibase.setChangeLog("classpath:liquibase/master.xml");

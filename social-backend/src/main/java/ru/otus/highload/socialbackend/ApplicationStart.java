@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -37,15 +40,19 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        int USERS_TO_CREATE = 10;
-//        for (int i = 0; i < USERS_TO_CREATE; i++) {
-//            final int m = i;
-//            List<User> users = IntStream.range(0, USERS_TO_CREATE)
-//                    .mapToObj(j -> newRandomUser(j + m * USERS_TO_CREATE))
-//                    .collect(Collectors.toList());
-//            userMasterRepository.saveAll(users);
-//            log.info("{} users inserted",  i * USERS_TO_CREATE);
-//        }
+        int USERS_TO_CREATE = 1000000;
+        int BATCH_SIZE = 100;
+        ExecutorService executorService = Executors.newFixedThreadPool(8);
+        for (int i = 1; i < USERS_TO_CREATE; i++) {
+            final int counter = i;
+            executorService.execute(() -> {
+                List<User> users = IntStream.range(0, BATCH_SIZE)
+                        .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
+                        .collect(Collectors.toList());
+                userMasterRepository.saveAll(users);
+                log.info("{} users inserted",  counter * BATCH_SIZE);
+            });
+        }
     }
 
     private User newRandomUser(int index) {
@@ -58,7 +65,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
                 .setRegisterDate(new Date())
                 .setPassword("Super_secure_pass")
                 .setAge(nameInt + 18)
-                .setLogin("user" + index)
+                .setLogin("new_user" + index)
                 .setCity("Moscow")
                 .setInterest("Sex, Drugs & Rock'n'Roll");
     }

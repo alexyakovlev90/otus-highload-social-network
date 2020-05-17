@@ -76,8 +76,8 @@ public class MasterDataSourceConfig {
     public static Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        hibernateProperties.setProperty("hibernate.show_sql", "true");
-        hibernateProperties.setProperty("hibernate.jdbc.batch_size", "100");
+        hibernateProperties.setProperty("hibernate.show_sql", "false");
+        hibernateProperties.setProperty("hibernate.jdbc.batch_size", "1000");
         return hibernateProperties;
     }
 }
