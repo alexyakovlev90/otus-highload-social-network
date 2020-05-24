@@ -42,4 +42,10 @@
 ~~6. Выбрать 2 запроса для тестирования, изменить для них датасорс~~
 ~~7. Протестировать нагрузку, записать в отчет~~
 
-#HW#5
+#HW#6
+1. Определить модель данных и ключ шардирования
+  - Система личных сообщений (шардинг) - https://qna.habr.com/q/571256
+  - опыт ВК - https://www.youtube.com/watch?v=UGbLNJiJmQo
+2. Определить решение для реализации шардирования
+  - Discord with Cassandra https://blog.discord.com/how-discord-stores-billions-of-messages-7fa6ec7ee4c7
+  - https://www.mongodb.com/blog/post/schema-design-for-social-inboxes-in-mongodb

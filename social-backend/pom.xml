@@ -26,25 +26,9 @@
     </dependencyManagement>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.finalName>social-backend</project.build.finalName>
-        <java.version>11</java.version>
-        <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
 
-        <spring-boot.version>2.0.4.RELEASE</spring-boot.version>
-
-        <!-- The javassist version should match the one managed by
-        https://mvnrepository.com/artifact/org.hibernate/hibernate-core/${hibernate.version} -->
-        <javassist.version>3.22.0-GA</javassist.version>
-        <!-- The liquibase version should match the one managed by
-        https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
-        <liquibase.version>3.5.5</liquibase.version>
-
-        <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
-        <validation-api.version>2.0.1.Final</validation-api.version>
         <swagger.version>2.9.2</swagger.version>
-        <mapstruct.version>1.2.0.Final</mapstruct.version>
         <feign.version>8.18.0</feign.version>
         <jjwt.version>0.9.0</jjwt.version>
     </properties>

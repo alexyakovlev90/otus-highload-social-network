@@ -19,7 +19,7 @@ SELECT * FROM friend_request fr WHERE fr.user_id = ? or fr.friend_id = ?
 SELECT * FROM user WHERE first_name like ? and last_name like ?
 ```
 4) Протестировать нагрузку на master и slave реплики
-- для генерации нагрузки на slave был использован скрипт [ДЗ№3](../../load-test/hw3-search-report.md)
+- для генерации нагрузки на slave был использован скрипт [ДЗ№3](../../index-load-test/hw3-search-report.md)
 - для генерации запросов на master [скрипт на Lua](wrk/test-master.lua)
 ```shell script
 # load test slave
