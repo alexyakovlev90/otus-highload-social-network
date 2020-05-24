@@ -12,6 +12,7 @@
     <modules>
         <module>social-backend</module>
         <module>social-chat</module>
+        <module>social-util</module>
 
         <module>social-frontend</module>
     </modules>
@@ -23,4 +24,14 @@
         <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
     </properties>
 
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>ru.otus.highload</groupId>
+                <artifactId>social-util</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
