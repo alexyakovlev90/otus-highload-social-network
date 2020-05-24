@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.rest.util;
+package ru.otus.highload.util.rest.util;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

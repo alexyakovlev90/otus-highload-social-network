@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.feature.user.UserInfoItemDto;
 import ru.otus.highload.socialbackend.feature.user.UserService;
-import ru.otus.highload.socialbackend.rest.response.ListResponse;
-import ru.otus.highload.socialbackend.rest.response.Response;
+import ru.otus.highload.util.rest.response.ListResponse;
+import ru.otus.highload.util.rest.response.Response;
 
 @RestController
 @RequiredArgsConstructor

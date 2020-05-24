@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.rest.response.ListResponse;
-import ru.otus.highload.socialbackend.rest.response.Response;
+import ru.otus.highload.util.rest.response.ListResponse;
+import ru.otus.highload.util.rest.response.Response;
 
 import java.util.List;
 

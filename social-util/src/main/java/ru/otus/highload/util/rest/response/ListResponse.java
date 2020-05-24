@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.rest.response;
+package ru.otus.highload.util.rest.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -8,7 +8,7 @@ import java.util.*;
         ignoreUnknown = true
 )
 public class ListResponse<T> extends AbstractResponse {
-    public List<T> data = new ArrayList();
+    public List<T> data = new ArrayList<>();
 
     public ListResponse() {
     }
@@ -18,7 +18,7 @@ public class ListResponse<T> extends AbstractResponse {
     }
 
     public ListResponse(Collection<T> data) {
-        this.data = new ArrayList(data);
+        this.data = new ArrayList<>(data);
     }
 
     public ListResponse(T... data) {

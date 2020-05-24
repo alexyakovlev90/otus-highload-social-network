@@ -42,17 +42,17 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
     public void onApplicationEvent(ContextRefreshedEvent event) {
         int USERS_TO_CREATE = 1000000;
         int BATCH_SIZE = 100;
-        ExecutorService executorService = Executors.newFixedThreadPool(8);
-        for (int i = 1; i < USERS_TO_CREATE; i++) {
-            final int counter = i;
-            executorService.execute(() -> {
-                List<User> users = IntStream.range(0, BATCH_SIZE)
-                        .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
-                        .collect(Collectors.toList());
-                userMasterRepository.saveAll(users);
-                log.info("{} users inserted",  counter * BATCH_SIZE);
-            });
-        }
+//        ExecutorService executorService = Executors.newFixedThreadPool(8);
+//        for (int i = 1; i < USERS_TO_CREATE; i++) {
+//            final int counter = i;
+//            executorService.execute(() -> {
+//                List<User> users = IntStream.range(0, BATCH_SIZE)
+//                        .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
+//                        .collect(Collectors.toList());
+//                userMasterRepository.saveAll(users);
+//                log.info("{} users inserted",  counter * BATCH_SIZE);
+//            });
+//        }
     }
 
     private User newRandomUser(int index) {

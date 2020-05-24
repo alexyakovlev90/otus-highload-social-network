@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.rest.errors;
+package ru.otus.highload.util.rest.errors;
 
 import java.net.URI;
 

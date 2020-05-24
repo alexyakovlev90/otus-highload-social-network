@@ -35,6 +35,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>ru.otus.highload</groupId>
+            <artifactId>social-util</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>

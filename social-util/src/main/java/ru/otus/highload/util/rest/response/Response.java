@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.rest.response;
+package ru.otus.highload.util.rest.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

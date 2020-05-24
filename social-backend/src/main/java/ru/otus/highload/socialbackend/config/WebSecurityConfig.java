@@ -1,7 +1,7 @@
 package ru.otus.highload.socialbackend.config;
 
 import ru.otus.highload.socialbackend.auth.AuthManager;
-import ru.otus.highload.socialbackend.rest.response.Response;
+import ru.otus.highload.util.rest.response.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

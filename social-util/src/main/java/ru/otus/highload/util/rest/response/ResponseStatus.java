@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.rest.response;
+package ru.otus.highload.util.rest.response;
 
 
 public enum ResponseStatus {
