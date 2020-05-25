@@ -133,10 +133,10 @@ sh.shardCollection("social_chat.messageDoc", {"chatId": 1, "dateCreated": -1})
 ### Возможность решардинга
 - Решардинг в MongoDB осуществляется с помощью Зон
   - https://docs.mongodb.com/manual/core/zone-sharding/
-- Для этого необходимо на каждый шард навешивать 1 или более зон, с диапазоном значений
-  Таким образом, при добавлении новых шардов можно перемещать зоны со старого шарда на новый
-  При использовании зон необходимо отключить собственный балансировщик MongoDB, который
-  используется для поддержания равномерного распределения данных
+- Для этого необходимо на каждый шард навешивать 1 или более зон, с диапазоном значений.
+  Таким образом, при добавлении новых шардов можно перемещать зоны со старого шарда на новый.
+  При использовании зон необходимо отключить собственный балансировщик MongoDB, который.
+  используется для поддержания равномерного распределения данных.
 - Документация по работе с зонами
   - https://docs.mongodb.com/manual/tutorial/manage-shard-zone/
 
@@ -147,6 +147,6 @@ sh.shardCollection("social_chat.messageDoc", {"chatId": 1, "dateCreated": -1})
   - https://docs.mongodb.com/manual/indexes/#index-types
 - Шардинг в MongoDB
   - https://docs.mongodb.com/manual/sharding/
-- Дезайн twitter like Social Inboxes in MongoDB
+- Design twitter like Social Inboxes in MongoDB
   - https://www.mongodb.com/blog/post/schema-design-for-social-inboxes-in-mongodb
 - Транзакции в монго https://habr.com/ru/post/417131/
