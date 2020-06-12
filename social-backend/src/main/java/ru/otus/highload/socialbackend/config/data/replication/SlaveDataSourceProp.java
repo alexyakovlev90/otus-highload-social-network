@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.config.data;
+package ru.otus.highload.socialbackend.config.data.replication;
 
 import lombok.Getter;
 import lombok.Setter;

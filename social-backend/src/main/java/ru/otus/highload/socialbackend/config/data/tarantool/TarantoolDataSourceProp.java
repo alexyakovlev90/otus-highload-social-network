@@ -1,15 +1,15 @@
-package ru.otus.highload.socialbackend.config.data;
+package ru.otus.highload.socialbackend.config.data.tarantool;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@ConfigurationProperties(prefix = "spring.datasource-slave2")
+//@Configuration
+//@ConfigurationProperties(prefix = "spring.datasource-tarantool")
 @Getter
 @Setter
-public class Slave2DataSourceProp {
+public class TarantoolDataSourceProp {
 
     private String driverClassName;
     private String jdbcUrl;

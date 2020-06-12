@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.config.data;
+package ru.otus.highload.socialbackend.config.data.tarantool;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -18,16 +18,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@Configuration
-//@ConfigurationProperties("spring.datasource-master")
-@EnableTransactionManagement
-@EnableJpaRepositories(
-        entityManagerFactoryRef = "entityManagerFactoryMaster",
-        transactionManagerRef = "transactionManagerMaster",
-        basePackages = {"ru.otus.highload.socialbackend.repository"}
-//        basePackages = {"ru.otus.highload.socialbackend.repository.master"}
-)
-public class MasterDataSourceConfig {
+//@Configuration
+public class TarantoolDataSourceConfig {
 
     private final static String PERSISTENCE_UNIT_NAME = "master";
 
@@ -35,8 +27,8 @@ public class MasterDataSourceConfig {
     private JpaVendorAdapter jpaVendorAdapter;
 
     @Primary
-    @Bean("dataSourceMaster")
-    public DataSource dataSourceMaster(MasterDataSourceProp masterDataSourceProp) {
+    @Bean("dataSourceTarantool")
+    public DataSource dataSourceMaster(TarantoolDataSourceProp masterDataSourceProp) {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName(masterDataSourceProp.getDriverClassName());
         dataSource.setJdbcUrl(masterDataSourceProp.getJdbcUrl());

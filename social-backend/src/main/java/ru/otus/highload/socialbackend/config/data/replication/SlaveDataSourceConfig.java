@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.config.data;
+package ru.otus.highload.socialbackend.config.data.replication;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -11,6 +11,7 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import ru.otus.highload.socialbackend.config.data.MasterDataSourceConfig;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
