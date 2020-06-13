@@ -34,7 +34,7 @@ docker run -d -it --privileged replicator
   - Для запроса написана lua-процедура на tarantool - [lua скрипт](./tarantool/conf/init.lua)
 - Для теста сгенерировали 100 тыс тестовых пользователей
 - Нагрузочные тесты с wrk
-- Запросы в MySQL
+- Запросы в MySQL - [lua скрипт](./wrk/search-mysql.lua)
 ```shell script
 wrk -t8 -c400 -d120s -s ./wrk/search-mysql.lua --latency http://localhost:9292/
 ```
@@ -54,7 +54,7 @@ Running 2m test @ http://localhost:9292/
 Requests/sec:   2556.69
 Transfer/sec:      0.96MB
 ```
-- Запросы в tarantool
+- Запросы в tarantool - [lua скрипт](./wrk/search-tarantool.lua)
 ```shell script
 wrk -t8 -c400 -d120s -s ./wrk/search-tarantool.lua --latency http://localhost:9292/
 ```
@@ -74,7 +74,7 @@ Running 2m test @ http://localhost:9292/
 Requests/sec:   9854.18
 Transfer/sec:      3.66MB
 ```
--- При одинаковых условиях нагрузки пропускная способность 1го инстанца tarantool оказалась в 3.5 раз больше
+- При одинаковых условиях нагрузки пропускная способность 1го инстанца tarantool оказалась в 3.5 раз больше
 
 
 ## Полезные ссылки
