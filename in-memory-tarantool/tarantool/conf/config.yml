@@ -1,0 +1,6 @@
+---
+pid_file: /var/run/tarantool/tarantool.pid
+wal_dir: /var/lib/tarantool
+listen: 3301
+vinyl_dir: /var/lib/tarantool
+memtx_dir: /var/lib/tarantool

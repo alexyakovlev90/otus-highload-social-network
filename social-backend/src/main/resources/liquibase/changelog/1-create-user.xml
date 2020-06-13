@@ -29,4 +29,13 @@
             <column name="register_date" type="datetime"/>
         </createTable>
     </changeSet>
+
+    <changeSet id="create user indexes" author="titkin">
+        <createIndex tableName="user" indexName="user_first_name_idx">
+            <column name="first_name"/>
+        </createIndex>
+        <createIndex tableName="user" indexName="user_last_name_idx">
+            <column name="last_name"/>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>

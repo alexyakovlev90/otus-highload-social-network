@@ -36,3 +36,28 @@ GRANT ALL PRIVILEGES ON *.* TO 'ay'@'localhost' IDENTIFIED BY 'ay_pass';
 
 wrk -t1 -c1 -d5s -s ./load-test/wrk/search-test.lua --latency http://localhost:9090/swagger-ui.html
 ```
+
+## tarantool
+- https://www.tarantool.io/ru/doc/1.10/reference/reference_lua/box_space/
+```shell script
+# create space
+box.schema.space.create('myspace', {if_not_exists=true})
+
+# имя 'primary', тип дерево, уникальный. part - индекс по 1й колонке (целое число). и 2й колонке строке  
+box.space.myspace:create_index('primary', {type="TREE", unique=true, parts={1, 'unsigned', 2, 'string'}, if_not_exists=true})
+box.space.myspace:create_index('tindex', {type="TREE", parts={3, 'unsigned'}, unique=false})
+box.space.myspace:create_index('hindex', {type="HASH", parts={1, 'unsigned'}})
+
+space = box.schema.space.create('tester')
+box.space.tester:create_index('primary', {type = 'hash', parts = {1, 'NUM'}})
+box.schema.user.create('test', { password = 'test' })
+box.schema.user.grant('test', 'execute,received,write', 'universe')
+box.space.tester:format{{name='id',type='num'},{name='text',type='str'}}
+
+
+dofile('/opt/tarantool/init.lua')
+```
+    private Long id;
+    private String login;
+    private String firstName;
+    private String lastName;

@@ -105,6 +105,11 @@ public class UserService {
                 .setFriend(friend);
     }
 
+    public List<User> searchByPrefix(String prefix) {
+        String prefixName = capitalize(prefix) +  "%";
+        return userSlaveRepository.getByNamePrefix(prefixName);
+    }
+
     public List<UserInfoItemDto> searchUser(String firstName, String lastName) {
         String lastNameLike;
         if (lastName == null) {

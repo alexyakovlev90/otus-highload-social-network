@@ -43,3 +43,5 @@ npm-debug.log.*
 
 # Project specific
 env-var.properties
+/in-memory-tarantool/mysql-master/data/
+/in-memory-tarantool/tarantool/data/

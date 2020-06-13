@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import ru.otus.highload.socialbackend.domain.User;
+import ru.otus.highload.socialbackend.feature.tarantool.TarantoolService;
 import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
 
 import java.util.Arrays;
@@ -24,6 +25,7 @@ import java.util.stream.IntStream;
 public class ApplicationStart implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserMasterRepository userMasterRepository;
+    private final TarantoolService tarantoolService;
 
     private final List<String> names = Arrays.asList(
             "Александр", "Алексей", "Анатолий", "Андрей", "Антон", "Аркадий", "Артем", "Борислав", "Вадим", "Валентин",
@@ -40,19 +42,23 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        int USERS_TO_CREATE = 1000000;
+//        tarantoolService.insertOne();
+//        tarantoolService.();
+
+        int USERS_TO_CREATE = 1000;
         int BATCH_SIZE = 100;
-//        ExecutorService executorService = Executors.newFixedThreadPool(8);
-//        for (int i = 1; i < USERS_TO_CREATE; i++) {
-//            final int counter = i;
-//            executorService.execute(() -> {
-//                List<User> users = IntStream.range(0, BATCH_SIZE)
-//                        .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
-//                        .collect(Collectors.toList());
-//                userMasterRepository.saveAll(users);
-//                log.info("{} users inserted",  counter * BATCH_SIZE);
-//            });
-//        }
+        ExecutorService executorService = Executors.newFixedThreadPool(8);
+        for (int i = 1; i < USERS_TO_CREATE; i++) {
+            final int counter = i;
+            executorService.execute(() -> {
+                List<User> users = IntStream.range(0, BATCH_SIZE)
+                        .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
+                        .collect(Collectors.toList());
+                List<User> saved = userMasterRepository.saveAll(users);
+                tarantoolService.insertMany(saved);
+                log.info("{} users inserted",  counter * BATCH_SIZE);
+            });
+        }
     }
 
     private User newRandomUser(int index) {
@@ -65,7 +71,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
                 .setRegisterDate(new Date())
                 .setPassword("Super_secure_pass")
                 .setAge(nameInt + 18)
-                .setLogin("new_user" + index)
+                .setLogin("1_user" + index)
                 .setCity("Moscow")
                 .setInterest("Sex, Drugs & Rock'n'Roll");
     }

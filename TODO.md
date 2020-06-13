@@ -49,3 +49,16 @@
 2. Определить решение для реализации шардирования
   - Discord with Cassandra https://blog.discord.com/how-discord-stores-billions-of-messages-7fa6ec7ee4c7
   - https://www.mongodb.com/blog/post/schema-design-for-social-inboxes-in-mongodb
+  
+#HW#7
+
+1. Скрипт запуска tarantool
+2. Настроить реплицирование в tarantool (лучше всего версии 1.10)
+  - https://github.com/tarantool/mysql-tarantool-replication 
+3. Подключение tarantool к приложению
+4. Выбрать любой запрос и переписать его на lua-процедуру на tarantool
+
+5. Выбрать запрос для нагрузочного тестирования (wrk скрипт)
+
+
+

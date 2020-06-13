@@ -15,8 +15,9 @@ import java.util.Optional;
 public interface UserSlaveRepository extends JpaRepository<User, Long> {
     Optional<User> getByLogin(String login);
 
-    @Query(value= "SELECT * FROM user WHERE first_name like ?1 and last_name like ?2" +
-            " LIMIT 10",
-            nativeQuery = true)
+    @Query(value= "SELECT * FROM user WHERE first_name like ?1 and last_name like ?2 LIMIT 10", nativeQuery = true)
     List<User> getByFirstNameAndLastName(String firstName, String lastName);
+
+    @Query(value= "SELECT * FROM user WHERE first_name like ?1 or last_name like ?1 LIMIT 100", nativeQuery = true)
+    List<User> getByNamePrefix(String firstName);
 }
