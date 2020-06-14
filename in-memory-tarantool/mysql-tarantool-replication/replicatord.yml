@@ -1,0 +1,69 @@
+mysql:
+    host: 127.0.0.1
+    port: 3306
+    user: mydb_slave_user
+    password: mydb_slave_pwd
+    connect_retry: 15 # seconds
+
+tarantool:
+    host: 127.0.0.1:3301
+    binlog_pos_space: 512
+    binlog_pos_key: 0
+    connect_retry: 15 # seconds
+    sync_retry: 1000 # milliseconds
+
+mappings:
+      # Первая встреченная в конфиге таблица считается основной для спейса,
+      # удаление записи в ней вызовет удаление записи и в Tarantool'е.
+      # Удаление в следующих таблицах с таким-же id спейса удаления записи в Tarantool'е не вызовет,
+      # вместо этого все поля будут забиты null'ами (с подстановкой, см. ниже)
+    - database: mydb
+      table: User
+      columns: [ id, login, first_name, last_name ]
+      space: user_space
+      key_fields: [ 0 ]
+      # insert_call: function_name
+      # update_call: function_name
+      # delete_call: function_name
+
+#    - database: Monamour2
+#      table: AnketaMini
+#      columns: [ oid, package_id, birthdate, country_id, region_id, city_id, metro_id, gender, orientation, lookfor, age, iam, target, status, system_status, language_id, partner_id, type, type2, type3, type4, search_mode, changed, created, updated, to_vip_status, theme_id ]
+#      space: 513
+#      key_fields: [ 0 ]
+
+#    - database: Monamour2
+#      table: AnketaNamesDescr
+#      columns: [ oid, name ]
+#      space: 513
+#      key_fields: [ 0 ]
+#
+#    - database: Monamour2
+#      table: DefaultPhotos
+#      columns: [ anketa_id, oid, platform_id, extension, small_face, updated, moderated, huge_adult, rating_id, album_id, width, height, photo_params ]
+#      space: 513
+#      key_fields: [ 0 ]
+#
+#    - database: Monamour2
+#      table: RealUser_Phone
+#      columns: [ anketa_id, number ]
+#      space: 513
+#      key_fields: [ 0 ]
+#
+#    - database: Monamour2
+#      table: AnketaCounter
+#      columns: [anketa_id, photos_active, photos_adult ]
+#      space: 513
+#      key_fields: [ 0 ]
+
+spaces:
+    # Tarantool не умеет вставлять null'ы в поля, по которым есть индекс, а также при upsert'е зачем-то
+    # сначала валидирует ВСЕ аргументы, а только потом делает либо вставку, либо апдейт.
+    # Это проблема, если делать вставку из нескольких таблиц в один спейс, т.к. набор для вставки
+    # приходится дополнять null'ами, чтобы количество полей было всегда одинаковым.
+    #
+    # column_id: { (string|integer|unsigned): value }
+    user_space:
+        replace_null:
+            1: { string: "" }
+            2: { string: "" }
