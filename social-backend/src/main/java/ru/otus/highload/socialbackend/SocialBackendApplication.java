@@ -13,6 +13,7 @@ import ru.otus.highload.socialbackend.config.MainConfig;
 import ru.otus.highload.socialbackend.config.data.MasterDataSourceConfig;
 import ru.otus.highload.socialbackend.config.data.replication.Slave2DataSourceConfig;
 import ru.otus.highload.socialbackend.config.data.replication.SlaveDataSourceConfig;
+import ru.otus.highload.socialbackend.config.data.tarantool.TarantoolDataSourceConfig;
 
 
 @SpringBootConfiguration
@@ -22,7 +23,7 @@ import ru.otus.highload.socialbackend.config.data.replication.SlaveDataSourceCon
 @ComponentScan(
 //        basePackageClasses = MainConfig.class,
         excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {SlaveDataSourceConfig.class, Slave2DataSourceConfig.class}),
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {SlaveDataSourceConfig.class, Slave2DataSourceConfig.class, TarantoolDataSourceConfig.class}),
                 @ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
                 @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class)
         }

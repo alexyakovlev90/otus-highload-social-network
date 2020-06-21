@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-@RestController
+//@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/search")
 public class UserSearchController {

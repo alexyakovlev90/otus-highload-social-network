@@ -51,7 +51,6 @@
   - https://www.mongodb.com/blog/post/schema-design-for-social-inboxes-in-mongodb
   
 #HW#7
-
 1. Скрипт запуска tarantool
 2. Настроить реплицирование в tarantool (лучше всего версии 1.10)
   - https://github.com/tarantool/mysql-tarantool-replication 
@@ -61,4 +60,11 @@
 5. Выбрать запрос для нагрузочного тестирования (wrk скрипт)
 
 
-
+#HW#9
+1. Написать docker-compose для click-house и mysql
+  - https://stackoverflow.com/questions/52198099/creating-db-and-tables-in-a-dockerized-clickhouse-instance-from-docker-compose-f
+2. Настроить репликацию
+  - https://mydbops.wordpress.com/2020/02/21/3-step-migration-of-mysql-data-to-clickhouse-for-faster-analytics/
+  - https://www.altinity.com/blog/2018/6/30/realtime-mysql-clickhouse-replication-in-practice
+3. Или использовать буффер
+  - https://github.com/VKCOM/kittenhouse

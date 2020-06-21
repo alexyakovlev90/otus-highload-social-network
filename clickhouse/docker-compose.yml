@@ -1,0 +1,51 @@
+version: '3'
+services:
+  mysql_master:
+    image: mysql:5.7
+    container_name: "mysql_master"
+    env_file:
+      - mysql-master/mysql_master.env
+    restart: "no"
+    ports:
+      - 4406:3306
+    volumes:
+      - ./mysql-master/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./mysql-master/data:/var/lib/mysql
+    networks:
+      - overlay
+
+  clickhouse:
+    image: yandex/clickhouse-server:20.1.15.109
+    container_name: "clickhouse-server"
+#    environment:
+#      CLICKHOUSE_DB: my_database
+#      CLICKHOUSE_USER: username
+#      CLICKHOUSE_PASSWORD: password
+    ports:
+      - 8123:8123
+      - 9000:9000
+    volumes:
+#      - ./clickhouse-server/config.xml:/etc/clickhouse-server/config.xml
+      - ./clickhouse-server/data:/var/lib/clickhouse
+      - ./clickhouse-server/init:/docker-entrypoint-initdb.d
+    networks:
+      - clickhouse_overlay
+      - overlay
+
+  kittenhouse:
+    image: kittenhouse
+    container_name: "kittenhouse"
+    environment:
+      clickhouse: clickhouse:8123
+    ports:
+      - 13338:13338
+    depends_on:
+      - clickhouse
+    volumes:
+       - ./kittenhouse/data:/tmp/kittenhouse
+    networks:
+      - overlay
+
+networks:
+  overlay:
+  clickhouse_overlay:

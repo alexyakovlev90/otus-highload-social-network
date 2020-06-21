@@ -30,12 +30,10 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="create user indexes" author="titkin">
-        <createIndex tableName="user" indexName="user_first_name_idx">
-            <column name="first_name"/>
-        </createIndex>
-        <createIndex tableName="user" indexName="user_last_name_idx">
-            <column name="last_name"/>
+    <changeSet id="create user_age_sex_idx" author="titkin">
+        <createIndex tableName="user" indexName="user_age_sex_idx">
+            <column name="age"/>
+            <column name="sex"/>
         </createIndex>
     </changeSet>
 </databaseChangeLog>

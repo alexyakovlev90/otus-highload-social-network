@@ -45,3 +45,6 @@ npm-debug.log.*
 env-var.properties
 /in-memory-tarantool/mysql-master/data/
 /in-memory-tarantool/tarantool/data/
+/clickhouse/clickhouse-server/data/
+/clickhouse/mysql-master/data/
+/clickhouse/kittenhouse/data/

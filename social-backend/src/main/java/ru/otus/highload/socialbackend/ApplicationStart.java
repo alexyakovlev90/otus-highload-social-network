@@ -6,14 +6,13 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import ru.otus.highload.socialbackend.domain.User;
-import ru.otus.highload.socialbackend.feature.tarantool.TarantoolService;
+import ru.otus.highload.socialbackend.feature.clickhouse.ClickHouseServer;
 import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -25,7 +24,8 @@ import java.util.stream.IntStream;
 public class ApplicationStart implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserMasterRepository userMasterRepository;
-    private final TarantoolService tarantoolService;
+//    private final TarantoolService tarantoolService;
+    private final ClickHouseServer clickHouseServer;
 
     private final List<String> names = Arrays.asList(
             "Александр", "Алексей", "Анатолий", "Андрей", "Антон", "Аркадий", "Артем", "Борислав", "Вадим", "Валентин",
@@ -46,16 +46,19 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //        tarantoolService.();
 
         int USERS_TO_CREATE = 1000;
-        int BATCH_SIZE = 100;
+        int BATCH_SIZE = 1000;
         ExecutorService executorService = Executors.newFixedThreadPool(8);
         for (int i = 1; i < USERS_TO_CREATE; i++) {
             final int counter = i;
             executorService.execute(() -> {
                 List<User> users = IntStream.range(0, BATCH_SIZE)
                         .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
+//                        .map(userMasterRepository::save)
+//                        .peek(clickHouseServer::insertUser)
                         .collect(Collectors.toList());
                 List<User> saved = userMasterRepository.saveAll(users);
-                tarantoolService.insertMany(saved);
+                clickHouseServer.insertMany(saved);
+//                tarantoolService.insertMany(saved);
                 log.info("{} users inserted",  counter * BATCH_SIZE);
             });
         }
@@ -71,7 +74,8 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
                 .setRegisterDate(new Date())
                 .setPassword("Super_secure_pass")
                 .setAge(nameInt + 18)
-                .setLogin("1_user" + index)
+                .setSex(index % 3 != 0)
+                .setLogin("user_" + index)
                 .setCity("Moscow")
                 .setInterest("Sex, Drugs & Rock'n'Roll");
     }
