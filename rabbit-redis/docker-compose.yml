@@ -1,0 +1,76 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: "mysql"
+    env_file:
+      - mysql/mysql_master.env
+    restart: "no"
+    ports:
+      - 4406:3306
+    volumes:
+      - ./mysql/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./mysql/data:/var/lib/mysql
+    networks:
+      - overlay
+
+  redis:
+    image: redis:6
+    container_name: "redis-server"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru --appendonly yes
+#    command: redis-server --bind redis-container-name --requirepass some-long-password --maxmemory 256mb --maxmemory-policy allkeys-lru --appendonly yes
+#    environment:
+#      CLICKHOUSE_DB: my_database
+#      CLICKHOUSE_USER: username
+#      CLICKHOUSE_PASSWORD: password
+    ports:
+      - 6379:6379
+    volumes:
+#      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/data:/data
+    networks:
+      - overlay
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: "rabbitmq-server"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+#      RABBITMQ_VM_MEMORY_HIGH_WATERMARK: '{ vm_memory_high_watermark, { absolute, "256MiB" } }'
+    ports:
+      - 15672:15672
+      - 5672:5672
+      - 5671:5671
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+    networks:
+      - overlay
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+#      interval: 15s
+#      timeout: 10s
+#      retries: 5
+
+  app:
+    image: alexyakovlev90/ay-social:v9
+    container_name: "ay-social"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      RABBIT_HOST: rabbitmq
+      REDIS_HOST: redis
+    restart: on-failure
+    ports:
+      - 8080:8080
+      - 8888:8888
+      - 9292:9292
+    depends_on:
+      - rabbitmq
+      - mysql
+      - redis
+    networks:
+      - overlay
+
+networks:
+  overlay:
