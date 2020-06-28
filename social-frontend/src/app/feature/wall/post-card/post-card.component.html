@@ -1,0 +1,25 @@
+
+<mat-card class="post-card">
+  <div *ngIf="caption">
+    {{wallPost.fromUser.firstName}} (<a href="/user/{{wallPost.fromUser.login}}">{{wallPost.fromUser.login}}</a>)
+    commented on {{wallPost.toUser.firstName}}'s
+    (<a href="/user/{{wallPost.toUser.login}}">{{wallPost.toUser.login}}</a>) wall
+  </div>
+  <hr>
+  <mat-card-header>
+    <div mat-card-avatar class="post-card-header-image"></div>
+    <mat-card-title>
+      <a href="/user/{{wallPost.fromUser.login}}">
+        {{wallPost.fromUser.firstName}} {{wallPost.fromUser.lastName}}
+      </a>
+    </mat-card-title>
+    <mat-card-subtitle>{{wallPost.fromUser.login}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{wallPost.text}}
+    </p>
+  </mat-card-content>
+  <mat-card-footer class="post-card-footer">{{wallPost.dateCreated}}</mat-card-footer>
+
+</mat-card>

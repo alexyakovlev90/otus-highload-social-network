@@ -8,13 +8,18 @@ import ru.otus.highload.util.rest.response.Response;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/wall-post")
+@RequestMapping("/api/wall-posts")
 public class WallPostController {
 
     private final WallPostService wallPostService;
 
-    @GetMapping()
-    public ListResponse<WallPostDto> getUserPosts(@RequestParam(value = "userId", required = false) Long userId) {
+    @GetMapping
+    public ListResponse<WallPostDto> getWallPosts(@RequestParam(value = "userId", required = false) Long userId) {
+        return new ListResponse<>(wallPostService.getUserWallPosts(userId));
+    }
+
+    @GetMapping("/lenta")
+    public ListResponse<WallPostDto> getUserLentaPosts(@RequestParam(value = "userId", required = false) Long userId) {
         return new ListResponse<>(wallPostService.getUserLentaPosts(userId));
     }
 

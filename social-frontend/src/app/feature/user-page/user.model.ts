@@ -25,4 +25,11 @@ export interface UserUpdateItem {
   city: string;
 }
 
+export interface UserLiteItem {
+  id?: number;
+  login: string;
+  firstName: string;
+  lastName: string;
+}
+
 

@@ -4,7 +4,7 @@ import {AuthService} from "../../auth/auth.service";
 import {FriendRequestService} from "../friend-request/friend-request.service";
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-user-card',
   templateUrl: './user-card.component.html',
   styleUrls: ['./user-card.component.css']
 })

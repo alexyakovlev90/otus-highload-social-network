@@ -1,0 +1,16 @@
+<div class="wall-panel">
+  <form class="add-post-form">
+    <mat-form-field class="add-post-full-width">
+      <mat-label>Write some post</mat-label>
+      <textarea matInput
+                name="message"
+                placeholder="Here you can write post on the wall..." [(ngModel)]="wallPost.text"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="addPost()">Post</button>
+  </form>
+
+  <div *ngFor="let post of posts">
+    <app-post-card [wallPost]="post" [caption]="false"></app-post-card>
+  </div>
+
+</div>

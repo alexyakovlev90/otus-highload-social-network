@@ -24,6 +24,9 @@ import {UserCardComponent} from './feature/user-card/user-card.component';
 import {SignUpComponent} from './feature/sign-up/sign-up.component';
 import {MatSelectModule} from "@angular/material/select";
 import {AuthExpiredInterceptor} from "./auth/auth-expired.interceptor";
+import { LentaComponent } from './feature/lenta/lenta.component';
+import { WallComponent } from './feature/wall/wall.component';
+import { PostCardComponent } from './feature/wall/post-card/post-card.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import {AuthExpiredInterceptor} from "./auth/auth-expired.interceptor";
     UserListComponent,
     UserCardComponent,
     SignUpComponent,
+    LentaComponent,
+    WallComponent,
+    PostCardComponent,
   ],
     imports: [
         BrowserModule,

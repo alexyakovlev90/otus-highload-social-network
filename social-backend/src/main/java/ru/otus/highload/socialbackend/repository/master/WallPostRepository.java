@@ -14,9 +14,13 @@ public interface WallPostRepository extends JpaRepository<WallPost, Long> {
 
 
     @Query(value= "SELECT distinct wp.* FROM wall_post wp " +
-            " INNER JOIN friend_request fr ON wp.from_user_id=fr.user_id AND wp.to_user_id=fr.friend_id" +
-            "                               OR wp.from_user_id=fr.friend_id AND wp.to_user_id=fr.user_id" +
-            " WHERE wp.from_user_id = ?1 AND wp.id > ?2 LIMIT ?3",
+            " INNER JOIN friend_request fr ON wp.to_user_id=fr.friend_id OR wp.to_user_id=fr.user_id" +
+            " WHERE (fr.friend_id = ?1 OR fr.user_id=?1) AND wp.id >= ?2 " +
+            " ORDER BY wp.date_created DESC " +
+            " LIMIT ?3",
             nativeQuery = true)
     List<WallPost> getByToUserInWithOffset(Long userId, Long minId, Long limit);
+
+
+    List<WallPost> getWallPostsByToUserOrderByDateCreatedDesc(Long toUser);
 }

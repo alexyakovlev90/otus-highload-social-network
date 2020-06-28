@@ -1,0 +1,22 @@
+.post-card {
+  max-width: 600px;
+  margin-bottom: 2px;
+}
+
+.post-card-header-image {
+  background-image: url('https://avatarfiles.alphacoders.com/442/44217.jpg');
+  background-size: cover;
+}
+
+.post-card-footer {
+  color: #7f7f7f;
+  font-weight: lighter;
+  text-align: right;
+  margin: 1px;
+}
+
+/*.user-action {*/
+/*  position: absolute;*/
+/*  right: 10px;*/
+/*  width: 60px;*/
+/*}*/

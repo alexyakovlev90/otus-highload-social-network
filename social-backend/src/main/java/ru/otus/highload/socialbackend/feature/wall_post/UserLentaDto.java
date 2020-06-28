@@ -6,6 +6,7 @@ import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Setter
@@ -15,5 +16,5 @@ import java.util.List;
 public class UserLentaDto {
 
     private Long userId;
-    private List<WallPostDto> wallPosts = new ArrayList<>();
+    private List<WallPostDto> wallPosts = new LinkedList<>();
 }

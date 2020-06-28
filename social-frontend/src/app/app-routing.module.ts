@@ -10,6 +10,8 @@ import {SignUpComponent} from "./feature/sign-up/sign-up.component";
 import {UserResolver} from "./feature/user-page/user.resolver";
 import {SearchResolver} from "./feature/user-list/search.resolver";
 import {FriendsResolver} from "./feature/user-list/friends.resolver";
+import {LentaComponent} from "./feature/lenta/lenta.component";
+import {LentaResolver} from "./feature/lenta/lenta.resolver";
 
 
 const routes: Routes = [
@@ -30,6 +32,10 @@ const routes: Routes = [
       {
         path: 'search', component: UserListComponent,
         resolve: {body: SearchResolver}
+      },
+      {
+        path: 'lenta', component: LentaComponent,
+        resolve: {body: LentaResolver}
       },
       {
         path: 'friends', component: UserListComponent,

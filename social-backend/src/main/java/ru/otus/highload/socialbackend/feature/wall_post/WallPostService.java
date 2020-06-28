@@ -1,5 +1,6 @@
 package ru.otus.highload.socialbackend.feature.wall_post;
 
+import io.jsonwebtoken.lang.Assert;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static ru.otus.highload.socialbackend.config.redis.RedisConfig.LENTA_CACHE;
@@ -36,9 +38,29 @@ public class WallPostService {
     @Transactional
     public WallPostDto savePost(WallPost wallPost) {
         wallPost.setDateCreated(LocalDateTime.now());
+        Optional<User> authUser = securityService.getAuthUser();
+        Assert.isTrue(authUser.isPresent(), "Auth user must be presented");
+        wallPost.setFromUser(authUser.get().getId());
+
         WallPost save = wallPostRepository.save(wallPost);
         rabbitService.publish(save);
         return wallPostToDtoConverter.convert(save);
+    }
+
+    public List<WallPostDto> getUserWallPosts(Long userId) {
+        if (userId != null) {
+            return wallPostRepository.getWallPostsByToUserOrderByDateCreatedDesc(userId).stream()
+                    .map(wallPostToDtoConverter::convert)
+                    .collect(Collectors.toList());
+        }
+
+        return securityService.getAuthUser()
+                .map(User::getId)
+                .map(wallPostRepository::getWallPostsByToUserOrderByDateCreatedDesc)
+                .orElse(Collections.emptyList()).stream()
+                .map(wallPostToDtoConverter::convert)
+                .collect(Collectors.toList());
+
     }
 
     public List<WallPostDto> getUserLentaPosts(Long userId) {
