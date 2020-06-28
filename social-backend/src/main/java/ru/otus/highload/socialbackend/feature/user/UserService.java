@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.feature.security.PasswordUtils;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.domain.User;
+import ru.otus.highload.socialbackend.feature.wall_post.WallPostService;
 import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
 import ru.otus.highload.socialbackend.repository.slave.FriendRequestSlaveRepository;
 import ru.otus.highload.socialbackend.feature.friend_request.FriendRequestService;
@@ -29,6 +30,7 @@ public class UserService {
     private final FriendRequestService friendRequestService;
     private final SecurityService securityService;
     private final FriendRequestSlaveRepository friendRequestSlaveRepository;
+    private final WallPostService wallPostService;
 
     public UserInfoItemDto getById(Long id) {
         return userMasterRepository.findById(id)
@@ -54,6 +56,7 @@ public class UserService {
         if (isNew == null) {
             user.setRegisterDate(new Date());
             securityService.authenticate(savedUser);
+            wallPostService.initUserLenta(user);
         }
         return this.convert(savedUser);
     }

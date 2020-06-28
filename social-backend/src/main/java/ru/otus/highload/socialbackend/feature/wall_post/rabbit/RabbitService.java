@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.domain.WallPost;
@@ -12,6 +13,7 @@ import ru.otus.highload.socialbackend.feature.user.UserService;
 import ru.otus.highload.socialbackend.feature.wall_post.RedisService;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,11 +27,13 @@ public class RabbitService {
 
 //    private final RabbitWallPostDeliveryCallback rabbitWallPostDeliveryCallback;
     private final ConnectionFactory connectionFactory;
-    private final UserService userService;
     private final RabbitChannelHolder rabbitChannelHolder;
     private final RedisService redisService;
-
     private final ObjectMapper objectMapper;
+
+    @Lazy
+    @Resource
+    private UserService userService;
 
     @PostConstruct
     public void init() {

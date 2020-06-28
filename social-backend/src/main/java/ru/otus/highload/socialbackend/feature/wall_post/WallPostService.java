@@ -35,6 +35,12 @@ public class WallPostService {
     @Resource
     private WallPostService self;
 
+    public void initUserLenta(User user) {
+        // warm up lenta cache and subscribe to new posts
+        self.getLentaCached(user.getId());
+        rabbitService.subscribeToFriendsPosts(user);
+    }
+
     @Transactional
     public WallPostDto savePost(WallPost wallPost) {
         wallPost.setDateCreated(LocalDateTime.now());

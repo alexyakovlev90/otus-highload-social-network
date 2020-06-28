@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SecurityService {
 
-    private final AuthManager authManager;
+//    private final AuthManager authManager;
 
     public Optional<User> getAuthUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -29,7 +29,7 @@ public class SecurityService {
 
     public void authenticate(User user) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, user.getPassword(), Collections.emptyList());
-//        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        authManager.authenticate(authenticationToken);
+//        authManager.authenticate(authenticationToken);
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
     }
 }

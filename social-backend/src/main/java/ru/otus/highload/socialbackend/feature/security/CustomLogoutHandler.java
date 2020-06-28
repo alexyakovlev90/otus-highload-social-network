@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.feature.wall_post.rabbit.RabbitChannelHolder;

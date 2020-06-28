@@ -3,7 +3,6 @@ package ru.otus.highload.socialbackend.feature.security;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,10 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.feature.wall_post.WallPostService;
-import ru.otus.highload.socialbackend.feature.wall_post.rabbit.RabbitService;
 import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
 
-import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.Optional;
@@ -29,14 +26,8 @@ public class AuthManager implements AuthenticationManager {
     private static final Logger logger = LoggerFactory.getLogger(AuthManager.class);
 
     private final UserMasterRepository userMasterRepository;
+    private final WallPostService wallPostService;
 
-    @Lazy
-    @Resource
-    private WallPostService wallPostService;
-
-    @Lazy
-    @Resource
-    private RabbitService rabbitService;
 
     @Override
     @Transactional
@@ -55,11 +46,7 @@ public class AuthManager implements AuthenticationManager {
 
             if (passwordMatch) {
                 logger.info("User {} logged in", user.getLogin());
-
-                // warm up lenta cache and subscribe to new posts
-                wallPostService.getLentaCached(user.getId());
-                rabbitService.subscribeToFriendsPosts(user);
-
+                wallPostService.initUserLenta(user);
                 return new UsernamePasswordAuthenticationToken(user, auth.getCredentials(), Collections.emptyList());
             }
         }
