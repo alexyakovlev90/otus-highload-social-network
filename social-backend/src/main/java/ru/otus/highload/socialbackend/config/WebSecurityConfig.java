@@ -1,6 +1,7 @@
 package ru.otus.highload.socialbackend.config;
 
-import ru.otus.highload.socialbackend.auth.AuthManager;
+import ru.otus.highload.socialbackend.feature.security.AuthManager;
+import ru.otus.highload.socialbackend.feature.security.CustomLogoutHandler;
 import ru.otus.highload.util.rest.response.Response;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Resource
     private AuthManager authManager;
+
+    @Resource
+    private CustomLogoutHandler logoutHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -66,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/api/logout"))
+                .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler((request, response, authentication) -> {
                     response.setStatus(HttpServletResponse.SC_OK);
                     response.getWriter().print(objectMapper.writeValueAsString(new Response<Void>(true)));

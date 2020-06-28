@@ -3,7 +3,7 @@ package ru.otus.highload.socialbackend.feature.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.highload.socialbackend.auth.PasswordUtils;
+import ru.otus.highload.socialbackend.feature.security.PasswordUtils;
 import ru.otus.highload.socialbackend.domain.FriendRequest;
 import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;

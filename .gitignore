@@ -48,3 +48,6 @@ env-var.properties
 /clickhouse/clickhouse-server/data/
 /clickhouse/mysql-master/data/
 /clickhouse/kittenhouse/data/
+/rabbit-redis/mysql/data/
+/rabbit-redis/redis/data/
+/rabbit-redis/rabbitmq/data/

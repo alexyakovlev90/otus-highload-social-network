@@ -68,3 +68,12 @@
   - https://www.altinity.com/blog/2018/6/30/realtime-mysql-clickhouse-replication-in-practice
 3. Или использовать буффер
   - https://github.com/VKCOM/kittenhouse
+
+#HW#8
+~~1. Поднять redis~~
+~~2. Поднять rabbit~~ 
+~~3. Модель данных хранения сообщений~~
+~~4. Нарисовать схему работы~~
+~~5. Реализовать PUB/SUB с Rabbit~~
+6. Прикрутить запись и обновление в Redis
+6. Реализовать фронт

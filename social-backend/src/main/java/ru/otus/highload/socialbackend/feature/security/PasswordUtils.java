@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.auth;
+package ru.otus.highload.socialbackend.feature.security;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

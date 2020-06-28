@@ -2,6 +2,7 @@ package ru.otus.highload.socialbackend;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,9 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //    private final TarantoolService tarantoolService;
     private final ClickHouseServer clickHouseServer;
 
+    @Value("${init-data:false}")
+    private boolean initData;
+
     private final List<String> names = Arrays.asList(
             "Александр", "Алексей", "Анатолий", "Андрей", "Антон", "Аркадий", "Артем", "Борислав", "Вадим", "Валентин",
             "Валерий", "Василий", "Виктор", "Виталий", "Владимир", "Вячеслав", "Геннадий", "Георгий", "Григорий", "Даниил",
@@ -45,22 +49,24 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //        tarantoolService.insertOne();
 //        tarantoolService.();
 
-        int USERS_TO_CREATE = 1000;
-        int BATCH_SIZE = 1000;
-        ExecutorService executorService = Executors.newFixedThreadPool(8);
-        for (int i = 1; i < USERS_TO_CREATE; i++) {
-            final int counter = i;
-            executorService.execute(() -> {
-                List<User> users = IntStream.range(0, BATCH_SIZE)
-                        .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
+        if (true) {
+            int USERS_TO_CREATE = 3;
+            int BATCH_SIZE = 3;
+            ExecutorService executorService = Executors.newFixedThreadPool(8);
+            for (int i = 1; i < USERS_TO_CREATE; i++) {
+                final int counter = i;
+                executorService.execute(() -> {
+                    List<User> users = IntStream.range(0, BATCH_SIZE)
+                            .mapToObj(j -> newRandomUser(j + counter * BATCH_SIZE))
 //                        .map(userMasterRepository::save)
 //                        .peek(clickHouseServer::insertUser)
-                        .collect(Collectors.toList());
-                List<User> saved = userMasterRepository.saveAll(users);
-                clickHouseServer.insertMany(saved);
+                            .collect(Collectors.toList());
+                    List<User> saved = userMasterRepository.saveAll(users);
+//                clickHouseServer.insertMany(saved);
 //                tarantoolService.insertMany(saved);
-                log.info("{} users inserted",  counter * BATCH_SIZE);
-            });
+                    log.info("{} users inserted", counter * BATCH_SIZE);
+                });
+            }
         }
     }
 
@@ -68,6 +74,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
         Random rand = new Random(index);
         int nameInt = rand.nextInt(names.size() - 1);
         int lastNameInt = rand.nextInt(lastNames.size() - 1);
+        long timeMillis = System.currentTimeMillis() - 1000000L;
         return new User()
                 .setFirstName(names.get(nameInt))
                 .setLastName(lastNames.get(lastNameInt))
@@ -75,7 +82,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
                 .setPassword("Super_secure_pass")
                 .setAge(nameInt + 18)
                 .setSex(index % 3 != 0)
-                .setLogin("user_" + index)
+                .setLogin(timeMillis + "user_" + index)
                 .setCity("Moscow")
                 .setInterest("Sex, Drugs & Rock'n'Roll");
     }

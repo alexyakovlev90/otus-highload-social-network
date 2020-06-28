@@ -1,5 +1,7 @@
 package ru.otus.highload.socialbackend.feature.security;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +12,10 @@ import java.util.Collections;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class SecurityService {
+
+    private final AuthManager authManager;
 
     public Optional<User> getAuthUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -24,6 +29,7 @@ public class SecurityService {
 
     public void authenticate(User user) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, user.getPassword(), Collections.emptyList());
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+//        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        authManager.authenticate(authenticationToken);
     }
 }

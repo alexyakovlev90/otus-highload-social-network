@@ -6,6 +6,7 @@
 
     <include file="liquibase/changelog/1-create-user.xml" relativeToChangelogFile="false"/>
     <include file="liquibase/changelog/2-create-friend-request.xml" relativeToChangelogFile="false"/>
+    <include file="liquibase/changelog/3-create-wall-post.xml" relativeToChangelogFile="false"/>
 <!--    <include file="liquibase/changelog/initial_data.xml" relativeToChangelogFile="false"/>-->
 
 </databaseChangeLog>

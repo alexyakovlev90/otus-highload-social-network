@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="3-create-wall_post.xml" author="titkin">
+        <createTable tableName="wall_post">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="from_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to_user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="varchar(5000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="datetime"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create wall_post_idx" author="titkin">
+        <createIndex tableName="wall_post" indexName="wall_post_from_user_idx">
+            <column name="from_user_id"/>
+        </createIndex>
+        <createIndex tableName="wall_post" indexName="wall_post_to_user_idx">
+            <column name="to_user_id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
