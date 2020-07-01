@@ -10,12 +10,14 @@ import ru.otus.highload.socialbackend.domain.User;
 import ru.otus.highload.socialbackend.domain.WallPost;
 import ru.otus.highload.socialbackend.feature.security.SecurityService;
 import ru.otus.highload.socialbackend.feature.wall_post.rabbit.RabbitService;
+import ru.otus.highload.socialbackend.feature.websocket.WebSocketService;
 import ru.otus.highload.socialbackend.repository.master.WallPostRepository;
 
 import javax.annotation.Resource;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

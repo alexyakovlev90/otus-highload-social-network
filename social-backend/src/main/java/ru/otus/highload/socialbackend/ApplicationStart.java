@@ -49,7 +49,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //        tarantoolService.insertOne();
 //        tarantoolService.();
 
-        if (true) {
+        if (false) {
             int USERS_TO_CREATE = 3;
             int BATCH_SIZE = 3;
             ExecutorService executorService = Executors.newFixedThreadPool(8);

@@ -62,7 +62,6 @@ services:
       REDIS_HOST: redis
     restart: on-failure
     ports:
-      - 8080:8080
       - 8888:8888
       - 9292:9292
     depends_on:

@@ -11,6 +11,7 @@ import ru.otus.highload.socialbackend.domain.WallPost;
 import ru.otus.highload.socialbackend.feature.user.UserInfoItemDto;
 import ru.otus.highload.socialbackend.feature.user.UserService;
 import ru.otus.highload.socialbackend.feature.wall_post.RedisService;
+import ru.otus.highload.socialbackend.feature.websocket.WebSocketService;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -25,11 +26,12 @@ public class RabbitService {
 
     public static final String DEFAULT_EXCHANGE = "EXCHANGE_TOPIC";
 
-//    private final RabbitWallPostDeliveryCallback rabbitWallPostDeliveryCallback;
+    //    private final RabbitWallPostDeliveryCallback rabbitWallPostDeliveryCallback;
     private final ConnectionFactory connectionFactory;
     private final RabbitChannelHolder rabbitChannelHolder;
     private final RedisService redisService;
     private final ObjectMapper objectMapper;
+    private final WebSocketService webSocketService;
 
     @Lazy
     @Resource
@@ -141,11 +143,12 @@ public class RabbitService {
 
     public DeliverCallback deliverCallback(Long userId) {
         return (consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                log.info(" [x] Received message '{}' with routing key {}", message, delivery.getEnvelope().getRoutingKey());
-                // read json message
-                WallPost wallPost = objectMapper.readValue(message, WallPost.class);
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            log.info(" [x] Received message '{}' with routing key {}", message, delivery.getEnvelope().getRoutingKey());
+            // read json message
+            WallPost wallPost = objectMapper.readValue(message, WallPost.class);
             redisService.addPostToLenta(userId, wallPost);
+            webSocketService.sendMessageToLenta(wallPost, userId);
         };
     }
 }

@@ -12,7 +12,7 @@ import {AuthService} from "../../auth/auth.service";
 })
 export class UserResolver implements Resolve<UserInfoItem> {
 
-  constructor(private userService: UserService, private austService: AuthService, private router: Router) {
+  constructor(private userService: UserService, private authService: AuthService, private router: Router) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserInfoItem> {
@@ -22,7 +22,7 @@ export class UserResolver implements Resolve<UserInfoItem> {
       //   .pipe(
       //     map((resp: ObjectResponse<UserInfoItem>) => resp.data)
       //   )
-      return this.austService.getAuthUser()
+      return this.authService.getAuthUser()
         .pipe(
           map((resp: ObjectResponse<UserInfoItem>) => resp.data)
         )
