@@ -37,13 +37,13 @@ order by age, sex;
 
 ## Сравнить время построения отчета. Объяснить результат
 - для тестирования построения отчета на MySQL и Clickhouse вставили 1 млн пользователей
-- в ClickHouse отчет строится дольше
+- в ClickHouse отчет строится быстрее
 - ClickHouse:
 ```sql
 select age, sex, count(*) from user
          group by age, sex
          order by age, sex
-[2020-06-21 12:10:47] 78 rows retrieved starting from 1 in 1 s 143 ms (execution: 320 ms, fetching: 63 ms)
+[2020-08-09 18:23:34] 78 rows retrieved starting from 1 in 383 ms (execution: 320 ms, fetching: 63 ms)
 ```
 - MySQL:
 ```sql
