@@ -6,6 +6,7 @@ import ru.otus.highload.socialchat.domain.MessageDoc;
 import ru.otus.highload.util.DateTimeUtil;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,17 +16,21 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
 
-    public List<MessageDoc> getMessages(String chatId, String fromDate, Integer count) {
-        LocalDate dateCreated = DateTimeUtil.parseIsoDate(fromDate);
+    public List<MessageDoc> getMessages(String chatId, Long fromDate, Integer count) {
+        if (fromDate == null || fromDate == 0L) {
+            return messageRepository.findByChatId(chatId);
+        }
+
+        LocalDate dateCreated = DateTimeUtil.fromMilliseconds(fromDate).toLocalDate();
         return messageRepository.getByChatIdAndDateCreatedAfter(chatId, dateCreated)
-                .limit(count)
+                .limit(count != null ? count : 50)
                 .collect(Collectors.toList());
     }
 
     public MessageDoc createMessage(String chatId, Long from, Long date, String text) {
         MessageDoc messageDoc = new MessageDoc()
                 .setChatId(chatId)
-                .setDateCreated(date)
+                .setDateCreated(date != null ? date : System.currentTimeMillis())
                 .setFromUser(from)
                 .setText(text);
         return messageRepository.insert(messageDoc);

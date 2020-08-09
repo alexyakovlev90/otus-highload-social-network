@@ -17,8 +17,8 @@ public class MessageController {
 
     @GetMapping
     public ListResponse<MessageDoc> getMessages(@RequestParam("chatId") String chatId,
-                                                @RequestParam("fromDate") String fromDate,
-                                                @RequestParam("count") Integer count) {
+                                                @RequestParam(value = "fromDate", required = false) Long fromDate,
+                                                @RequestParam(value = "count", required = false) Integer count) {
         List<MessageDoc> messages = messageService.getMessages(chatId, fromDate, count);
         return new ListResponse<>(messages);
     }
@@ -26,7 +26,7 @@ public class MessageController {
     @PostMapping
     public Response<MessageDoc> createMessage(@RequestParam("chatId") String chatId,
                                               @RequestParam("fromUser") Long fromUser,
-                                              @RequestParam("date") Long date,
+                                              @RequestParam(value = "date", required = false) Long date,
                                               @RequestParam("text") String text) {
         MessageDoc message = messageService.createMessage(chatId, fromUser, date, text);
         return new Response<>(message);

@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package ru.otus.highload.grpc;
+
+service ChatGrpcService {
+    rpc getChats (ChatGetRequest) returns (ChatGetResponse) { }
+
+    rpc postChat (ChatPostRequest) returns (ChatPostResponse) { }
+}
+
+service MessageGrpcService {
+    rpc getMessages (MessageGetRequest) returns (MessageGetResponse) {
+    }
+
+    rpc postMessage (MessagePostRequest) returns (MessagePostResponse) {
+    }
+}
+
+message MessageDto {
+  string id = 1;
+  int64 fromUser = 2;
+  int64 dateCreated = 3;
+  string text = 4;
+}
+
+message ChatDto {
+  string id = 1;
+  int64 fromUser = 2;
+  int64 toUser = 3;
+  int64 dateCreated = 4;
+  repeated MessageDto messages = 5;
+}
+
+message ChatGetRequest {
+  int64 userId = 1;
+  int32 messagesCount = 2;
+}
+
+message ChatGetResponse {
+  repeated ChatDto chats = 1;
+}
+
+message ChatPostRequest {
+  int64 fromUser = 1;
+  int64 toUser = 2;
+  int64 dateCreated = 3;
+}
+
+message ChatPostResponse {
+  ChatDto chat = 1;
+}
+
+
+message MessageGetRequest {
+  string chatId = 1;
+  int64 fromDate = 2;
+  int32 messagesCount = 3;
+}
+
+message MessageGetResponse {
+  repeated MessageDto messages = 1;
+}
+
+message MessagePostRequest {
+  string chatId = 1;
+  int64 fromUserId = 2;
+  int64 date = 3;
+  string text = 4;
+}
+
+message MessagePostResponse {
+  MessageDto message = 1;
+}

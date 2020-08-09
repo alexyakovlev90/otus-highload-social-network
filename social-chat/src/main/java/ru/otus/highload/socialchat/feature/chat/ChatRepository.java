@@ -13,4 +13,9 @@ public interface ChatRepository extends MongoRepository<ChatDoc, String> {
     @Query(value="{fromUser: ?0}",
             sort="{'dateCreated': -1}")
     List<ChatDoc> findByFromUser(Long fromUser);
+
+    //{$or : [{name : "Name1"}, {name : "Name2"}]}
+    @Query(value="{$or : [{fromUser: ?0}, {toUser: ?0}]}",
+            sort="{'dateCreated': -1}")
+    List<ChatDoc> findUserChats(Long user);
 }

@@ -23,7 +23,7 @@ public class ChatController {
 
     @PostMapping()
     public Response<ChatDoc> createChat(@RequestParam("fromUser") Long fromUser, @RequestParam("toUser") Long toUser,
-                                        @RequestParam("date") Long date) {
+                                        @RequestParam(value = "date", required = false) Long date) {
         ChatDoc userChats = chatService.createChat(fromUser, toUser, date);
         return new Response<>(userChats);
     }
