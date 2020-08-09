@@ -32,7 +32,7 @@ CREATE INDEX user_age_sex_idx ON user(age, sex);
 ```sql
 select age, sex, count(*) from user
 group by age, sex
-order by age;
+order by age, sex;
 ```
 
 ## Сравнить время построения отчета. Объяснить результат
@@ -42,14 +42,14 @@ order by age;
 ```sql
 select age, sex, count(*) from user
          group by age, sex
-         order by age
-[2020-06-21 12:10:47] 78 rows retrieved starting from 1 in 1 s 143 ms (execution: 1 s 80 ms, fetching: 63 ms)
+         order by age, sex
+[2020-06-21 12:10:47] 78 rows retrieved starting from 1 in 1 s 143 ms (execution: 320 ms, fetching: 63 ms)
 ```
 - MySQL:
 ```sql
 select age, sex, count(*) from user
       group by age, sex
-      order by age
+      order by age, sex
 [2020-06-21 12:53:48] 78 rows retrieved starting from 1 in 530 ms (execution: 470 ms, fetching: 60 ms)
 ```
 - ClickHouse секционирован по (age,sex), в каждой секции количество пользователей уже посчитано в файле count.txt,

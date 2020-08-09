@@ -1,5 +1,6 @@
-package ru.otus.highload.socialbackend.feature.chat;
+package ru.otus.highload.socialbackend.feature.messaging.message;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,11 +10,13 @@ import lombok.experimental.Accessors;
 @Setter
 @ToString
 @Accessors(chain = true)
-public class ChatCoreDto {
+@EqualsAndHashCode(of = "id")
+public class MessageCoreDto {
 
     private String id;
 
+    private String chatId;
     private Long fromUser;
-    private Long toUser;
     private Long dateCreated;
+    private String text;
 }

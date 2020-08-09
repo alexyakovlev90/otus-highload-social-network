@@ -39,8 +39,11 @@ public class FriendRequestService {
 
     @Transactional
     public FriendRequest addFriend(Long userId) {
-        rabbitService.addSubscription(userId);
         return securityService.getAuthUser()
+                .map(authUser -> {
+                    rabbitService.addSubscription(authUser, userId);
+                    return authUser;
+                })
                 .map(User::getId)
                 .map(redisService::evictCache)
                 .map(authUserId -> this.addUserFriend(authUserId, userId))

@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.feature.chat;
+package ru.otus.highload.socialbackend.feature.messaging.chat;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

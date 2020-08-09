@@ -12,6 +12,8 @@ import ru.otus.highload.socialbackend.feature.user.UserInfoItemDto;
 import ru.otus.highload.socialbackend.feature.user.UserService;
 import ru.otus.highload.socialbackend.feature.wall_post.RedisService;
 import ru.otus.highload.socialbackend.feature.websocket.WebSocketService;
+import ru.otus.highload.socialbackend.repository.master.UserMasterRepository;
+import ru.otus.highload.socialbackend.repository.slave.UserSlaveRepository;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -32,6 +34,8 @@ public class RabbitService {
     private final RedisService redisService;
     private final ObjectMapper objectMapper;
     private final WebSocketService webSocketService;
+
+    private final UserSlaveRepository userSlaveRepository;
 
     @Lazy
     @Resource
@@ -90,16 +94,24 @@ public class RabbitService {
     /**
      * add user to subscriptions
      */
-    public void addSubscription(Long userId) {
+    public void addSubscription(User authUser, Long userId) {
+        subscribe(authUser, userId);
+
+        // opposite subscription
+        userSlaveRepository.findById(userId)
+                .ifPresent(user -> subscribe(user, authUser.getId()));
+    }
+
+    private void subscribe(User authUser, Long userId) {
         log.info("Subscribe to user({}) Posts", userId);
-        Channel channel = rabbitChannelHolder.getChannel(null);
+        Channel channel = rabbitChannelHolder.getChannel(authUser);
         if (channel == null) {
             return;
         }
 
         try {
 //            String queueName = channel.queueDeclare().getQueue();
-            String queueName = rabbitChannelHolder.getQueueName(null);
+            String queueName = rabbitChannelHolder.getQueueName(authUser);
             channel.queueBind(queueName, DEFAULT_EXCHANGE, userId.toString());
         } catch (Exception e) {
             log.error("Unable to subscribe for posts of user({})", userId);

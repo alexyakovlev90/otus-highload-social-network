@@ -1,14 +1,11 @@
-package ru.otus.highload.socialbackend.feature.message;
+package ru.otus.highload.socialbackend.feature.messaging.message;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
-import ru.otus.highload.grpc.ChatGrpcServiceOuterClass;
 import ru.otus.highload.grpc.MessageGrpcServiceGrpc;
-import ru.otus.highload.util.DateTimeUtil;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +17,7 @@ import static ru.otus.highload.grpc.ChatGrpcServiceOuterClass.*;
 public class MessageService {
 
     @GrpcClient("MessageGrpcService")
-    private final MessageGrpcServiceGrpc.MessageGrpcServiceBlockingStub messageGrpcService;
+    private MessageGrpcServiceGrpc.MessageGrpcServiceBlockingStub messageGrpcService;
 
     private final MessageGrpcConverter messageGrpcConverter;
 

@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.feature.chat;
+package ru.otus.highload.socialbackend.feature.messaging.chat;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +17,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ChatService {
 
-    @GrpcClient("MessageGrpcService")
-    private final ChatGrpcServiceGrpc.ChatGrpcServiceBlockingStub chatGrpcService;
-
     private final ChatGrpcConverter chatGrpcConverter;
+
+    @GrpcClient("MessageGrpcService")
+    private ChatGrpcServiceGrpc.ChatGrpcServiceBlockingStub chatGrpcService;
+
 
     public List<ChatCoreDto> getUserChats(Long userId) {
         ChatGetRequest req = ChatGetRequest.newBuilder()

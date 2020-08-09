@@ -1,4 +1,4 @@
-package ru.otus.highload.socialbackend.feature.message;
+package ru.otus.highload.socialbackend.feature.messaging.message;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
