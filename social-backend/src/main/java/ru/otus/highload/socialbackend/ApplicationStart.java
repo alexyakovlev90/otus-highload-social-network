@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 public class ApplicationStart implements ApplicationListener<ContextRefreshedEvent> {
 
     private final UserMasterRepository userMasterRepository;
-//    private final TarantoolService tarantoolService;
+    //    private final TarantoolService tarantoolService;
     private final ClickHouseServer clickHouseServer;
 
     @Value("${init-data:false}")
@@ -49,9 +49,9 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //        tarantoolService.insertOne();
 //        tarantoolService.();
 
-        if (false) {
-            int USERS_TO_CREATE = 3;
-            int BATCH_SIZE = 3;
+        if (true) {
+            int USERS_TO_CREATE = 1000;
+            int BATCH_SIZE = 1000;
             ExecutorService executorService = Executors.newFixedThreadPool(8);
             for (int i = 1; i < USERS_TO_CREATE; i++) {
                 final int counter = i;
@@ -62,7 +62,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //                        .peek(clickHouseServer::insertUser)
                             .collect(Collectors.toList());
                     List<User> saved = userMasterRepository.saveAll(users);
-//                clickHouseServer.insertMany(saved);
+                    clickHouseServer.insertMany(saved);
 //                tarantoolService.insertMany(saved);
                     log.info("{} users inserted", counter * BATCH_SIZE);
                 });

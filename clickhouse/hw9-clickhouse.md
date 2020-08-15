@@ -22,7 +22,7 @@ CREATE TABLE default.user (
 )
 ENGINE = MergeTree()
 PARTITION BY (age,sex)
-ORDER BY id;
+ORDER BY (age,sex);
 ``` 
 - добавили в MySQL индекс по возрасту и полу
 ```sql

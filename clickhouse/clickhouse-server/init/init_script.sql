@@ -51,4 +51,4 @@ CREATE TABLE default.user (
 )
 ENGINE = MergeTree()
 PARTITION BY (age,sex)
-ORDER BY id;
+ORDER BY (age,sex);
