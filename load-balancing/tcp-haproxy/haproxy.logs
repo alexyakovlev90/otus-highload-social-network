@@ -1,0 +1,15 @@
+Server application_nodes/server02 is DOWN, reason: Layer4 connection problem, info: "Connection refused", check duration: 0ms. 0 active and 0 backup servers left. 0 sessions active, 0 requeued, 0 remaining in queue.
+backend application_nodes has no server available!
+[ALERT] 227/150110 (7) : backend 'application_nodes' has no server available!
+[WARNING] 227/150133 (7) : Server application_nodes/server01 is UP, reason: Layer4 check passed, check duration: 0ms. 1 active and 0 backup servers online. 0 sessions requeued, 0 total in queue.
+Server application_nodes/server01 is UP, reason: Layer4 check passed, check duration: 0ms. 1 active and 0 backup servers online. 0 sessions requeued, 0 total in queue.
+[WARNING] 227/150134 (7) : Server application_nodes/server02 is UP, reason: Layer4 check passed, check duration: 0ms. 2 active and 0 backup servers online. 0 sessions requeued, 0 total in queue.
+Server application_nodes/server02 is UP, reason: Layer4 check passed, check duration: 0ms. 2 active and 0 backup servers online. 0 sessions requeued, 0 total in queue.
+Connect from 192.168.128.1:54722 to 192.168.128.7:80 (haproxy/TCP)
+Connect from 192.168.128.1:54730 to 192.168.128.7:80 (haproxy/TCP)
+Connect from 192.168.128.1:54736 to 192.168.128.7:80 (haproxy/TCP)
+Connect from 192.168.128.1:54742 to 192.168.128.7:80 (haproxy/TCP)
+Connect from 192.168.128.1:54748 to 192.168.128.7:80 (haproxy/TCP)
+[WARNING] 227/150311 (7) : Server application_nodes/server02 is DOWN, reason: Layer4 connection problem, info: "Connection refused", check duration: 0ms. 1 active and 0 backup servers left. 2 sessions active, 0 requeued, 0 remaining in queue.
+Server application_nodes/server02 is DOWN, reason: Layer4 connection problem, info: "Connection refused", check duration: 0ms. 1 active and 0 backup servers left. 2 sessions active, 0 requeued, 0 remaining in queue.
+➜

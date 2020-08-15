@@ -23,7 +23,7 @@ import ru.otus.highload.socialbackend.config.data.tarantool.TarantoolDataSourceC
 @ComponentScan(
 //        basePackageClasses = MainConfig.class,
         excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {SlaveDataSourceConfig.class, Slave2DataSourceConfig.class, TarantoolDataSourceConfig.class}),
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {/*SlaveDataSourceConfig.class,*/ Slave2DataSourceConfig.class, TarantoolDataSourceConfig.class}),
                 @ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
                 @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class)
         }

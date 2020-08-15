@@ -24,8 +24,8 @@ import java.util.Properties;
 @EnableJpaRepositories(
         entityManagerFactoryRef = "entityManagerFactoryMaster",
         transactionManagerRef = "transactionManagerMaster",
-        basePackages = {"ru.otus.highload.socialbackend.repository"}
-//        basePackages = {"ru.otus.highload.socialbackend.repository.master"}
+//        basePackages = {"ru.otus.highload.socialbackend.repository"}
+        basePackages = {"ru.otus.highload.socialbackend.repository.master"}
 )
 public class MasterDataSourceConfig {
 

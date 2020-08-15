@@ -50,7 +50,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //        tarantoolService.();
 
         if (true) {
-            int USERS_TO_CREATE = 1000;
+            int USERS_TO_CREATE = 2;
             int BATCH_SIZE = 1000;
             ExecutorService executorService = Executors.newFixedThreadPool(8);
             for (int i = 1; i < USERS_TO_CREATE; i++) {
@@ -62,7 +62,7 @@ public class ApplicationStart implements ApplicationListener<ContextRefreshedEve
 //                        .peek(clickHouseServer::insertUser)
                             .collect(Collectors.toList());
                     List<User> saved = userMasterRepository.saveAll(users);
-                    clickHouseServer.insertMany(saved);
+//                    clickHouseServer.insertMany(saved);
 //                tarantoolService.insertMany(saved);
                     log.info("{} users inserted", counter * BATCH_SIZE);
                 });

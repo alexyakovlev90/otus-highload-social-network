@@ -1,0 +1,95 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: "mysql"
+    env_file:
+      - mysql/mysql_master.env
+    restart: "no"
+    ports:
+      - 4406:3306
+    volumes:
+      - ./mysql/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./mysql/data:/var/lib/mysql
+    networks:
+      - overlay
+
+  redis:
+    image: redis:6
+    container_name: "redis-server"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru --appendonly yes
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/data:/data
+    networks:
+      - overlay
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: "rabbitmq-server"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    ports:
+      - 15672:15672
+      - 5672:5672
+      - 5671:5671
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+    networks:
+      - overlay
+
+  app1:
+    image: alexyakovlev90/ay-social:v10
+    container_name: "ay-social-1"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      RABBIT_HOST: rabbitmq
+      REDIS_HOST: redis
+    restart: on-failure
+    ports:
+      - 8888:8888
+      - 9292:9292
+    depends_on:
+      - rabbitmq
+      - mysql
+      - redis
+    networks:
+      - overlay
+
+  app2:
+    image: alexyakovlev90/ay-social:v10
+    container_name: "ay-social-2"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      RABBIT_HOST: rabbitmq
+      REDIS_HOST: redis
+    restart: on-failure
+    ports:
+      - 8889:8888
+      - 9293:9292
+    depends_on:
+      - rabbitmq
+      - mysql
+      - redis
+    networks:
+      - overlay
+
+  nginx:
+    image: nginx:1.19.2
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/logs:/etc/nginx/logs
+    ports:
+      - "8080:80"
+    environment:
+      - NGINX_HOST=foobar.com
+      - NGINX_PORT=80
+    networks:
+      - overlay
+
+networks:
+  overlay:
