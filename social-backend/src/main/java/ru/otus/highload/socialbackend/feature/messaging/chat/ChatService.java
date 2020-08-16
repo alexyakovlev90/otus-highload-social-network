@@ -19,7 +19,7 @@ public class ChatService {
 
     private final ChatGrpcConverter chatGrpcConverter;
 
-    @GrpcClient("MessageGrpcService")
+    @GrpcClient("chat-service")
     private ChatGrpcServiceGrpc.ChatGrpcServiceBlockingStub chatGrpcService;
 
 

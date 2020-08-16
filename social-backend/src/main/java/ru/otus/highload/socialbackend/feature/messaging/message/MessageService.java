@@ -16,7 +16,7 @@ import static ru.otus.highload.grpc.ChatGrpcServiceOuterClass.*;
 @RequiredArgsConstructor
 public class MessageService {
 
-    @GrpcClient("MessageGrpcService")
+    @GrpcClient("chat-service")
     private MessageGrpcServiceGrpc.MessageGrpcServiceBlockingStub messageGrpcService;
 
     private final MessageGrpcConverter messageGrpcConverter;
