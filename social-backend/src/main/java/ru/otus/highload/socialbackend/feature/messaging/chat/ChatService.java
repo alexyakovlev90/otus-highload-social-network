@@ -19,8 +19,8 @@ public class ChatService {
 
     private final ChatGrpcConverter chatGrpcConverter;
 
-    @GrpcClient("chat-service")
-    private ChatGrpcServiceGrpc.ChatGrpcServiceBlockingStub chatGrpcService;
+//    @GrpcClient("chat-service")
+    private final ChatGrpcServiceGrpc.ChatGrpcServiceBlockingStub chatGrpcService;
 
 
     public List<ChatCoreDto> getUserChats(Long userId) {

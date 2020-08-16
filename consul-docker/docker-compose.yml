@@ -1,0 +1,84 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: "mysql"
+    env_file:
+      - mysql/mysql_master.env
+    restart: "no"
+    ports:
+      - 4406:3306
+    volumes:
+      - ./mysql/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./mysql/data:/var/lib/mysql
+    networks:
+      - overlay
+
+  redis:
+    image: redis:6
+    container_name: "redis-server"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru --appendonly yes
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/data:/data
+    networks:
+      - overlay
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: "rabbitmq-server"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    ports:
+      - 15672:15672
+      - 5672:5672
+      - 5671:5671
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq
+    networks:
+      - overlay
+
+  consul:
+    image: consul:1.1.0
+    hostname: localhost
+    networks:
+      - overlay
+    ports:
+      - 8500:8500
+
+  chat_app:
+    image: alexyakovlev90/ay-social-chat:v1
+    container_name: "ay-social-chat"
+    restart: on-failure
+    environment:
+      CONSUL_HOST: consul
+      CONSUL_PORT: 8500
+    ports:
+      - 9090:9090
+      - 7070:7070
+    networks:
+      - overlay
+
+  social_app:
+    image: alexyakovlev90/ay-social:v11
+    container_name: "ay-social"
+    environment:
+      RABBIT_HOST: rabbitmq
+      REDIS_HOST: redis
+      CONSUL_HOST: consul
+      CONSUL_PORT: 8500
+    restart: on-failure
+    ports:
+      - 8888:8888
+      - 9292:9292
+    depends_on:
+      - rabbitmq
+      - mysql
+      - redis
+    networks:
+      - overlay
+
+networks:
+  overlay:

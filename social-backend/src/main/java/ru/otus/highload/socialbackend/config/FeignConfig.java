@@ -18,7 +18,7 @@ public class FeignConfig {
     private final SocialProps socialProps;
 
     @Bean
-    public KittenhouseApiClient bestClientOfferClient(ObjectMapper objectMapper) {
+    public KittenhouseApiClient kittenhouseApiClient(ObjectMapper objectMapper) {
         return Feign.builder()
                 .contract(new SpringMvcContract())
                 .encoder(new Encoder.Default())
