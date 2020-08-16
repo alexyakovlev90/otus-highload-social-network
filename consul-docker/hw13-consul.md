@@ -11,6 +11,8 @@
 
 
 ## Полезные ссылки 
+- Service Discovery with Consul
+  - https://cloud.spring.io/spring-cloud-consul/multi/multi_spring-cloud-consul-discovery.html
 - Docker Compose + Consul + Spring Boot - https://habr.com/ru/post/429472/
 - Consul: Service Discovery это просто - https://habr.com/ru/post/266139/
 - Consul.io Часть 1 - https://habr.com/ru/post/278085/

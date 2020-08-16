@@ -58,6 +58,8 @@ services:
     ports:
       - 9090:9090
       - 7070:7070
+    volumes:
+      - /tmp:/tmp
     networks:
       - overlay
 
