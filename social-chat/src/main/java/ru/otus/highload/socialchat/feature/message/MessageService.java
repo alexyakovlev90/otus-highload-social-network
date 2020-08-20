@@ -1,5 +1,6 @@
 package ru.otus.highload.socialchat.feature.message;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.highload.socialchat.domain.MessageDoc;
@@ -16,6 +17,7 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
 
+    @Timed
     public List<MessageDoc> getMessages(String chatId, Long fromDate, Integer count) {
         if (fromDate == null || fromDate == 0L) {
             return messageRepository.findByChatId(chatId);
@@ -27,6 +29,7 @@ public class MessageService {
                 .collect(Collectors.toList());
     }
 
+    @Timed
     public MessageDoc createMessage(String chatId, Long from, Long date, String text) {
         MessageDoc messageDoc = new MessageDoc()
                 .setChatId(chatId)

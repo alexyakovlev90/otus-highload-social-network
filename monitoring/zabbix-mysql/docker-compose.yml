@@ -1,0 +1,112 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: "mysql"
+    env_file:
+      - mysql/mysql_master.env
+    restart: "no"
+    ports:
+      - 4406:3306
+    volumes:
+      - ./mysql/conf/mysql.conf.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./mysql/data:/var/lib/mysql
+    networks:
+      - overlay
+
+  zabbix-server:
+    restart: always
+    image: zabbix/zabbix-server-mysql:alpine-3.2-latest
+    container_name: "zabbix-server"
+    environment:
+      DB_SERVER_HOST: mysql
+      MYSQL_USER: mydb_user
+      MYSQL_PASSWORD: mydb_pwd
+#      MYSQL_PASSWORD: 111
+    ports:
+      - 10060:10050
+      - 10051:10051
+    volumes:
+      - ./zabbix:/usr/lib/zabbix
+    networks:
+      - overlay
+
+  zabbix-web:
+    restart: always
+    image: zabbix/zabbix-web-nginx-mysql:alpine-3.2-latest
+    container_name: "zabbix-web"
+    links:
+      - zabbix-server:zabbix-server
+    depends_on:
+      - zabbix-server
+    environment:
+      DB_SERVER_HOST: mysql
+      DB_SERVER_PORT: 3306
+      MYSQL_USER: mydb_user
+      MYSQL_PASSWORD: mydb_pwd
+#      MYSQL_PASSWORD: 111
+      ZBX_SERVER_HOST: zabbix-server
+      ZBX_SERVER_PORT: 10051
+      PHP_TZ: Europe/Moscow
+    ports:
+      - 8080:80
+    networks:
+      - overlay
+
+  zabbix-agent:
+    restart: unless-stopped
+    image: zabbix/zabbix-agent:alpine-3.2-latest
+    container_name: "zabbix-agent"
+    privileged: true   #access mode for allowing resource access
+#    links:
+#      - zabbix-server:zabbix-server
+    depends_on:
+      - zabbix-server
+    environment:
+      ZBX_HOSTNAME: zabbix-agent
+#      ZBX_SERVER_HOST: zabbix-server
+      ZBX_SERVER_HOST: 127.0.0.1
+      ZBX_SERVER_PORT: 10060
+    ports:
+      - 10050:10050
+    volumes:
+      - ./zabbix-agent:/usr/lib/zabbix
+    network_mode: "host"
+#    networks:
+#      - overlay
+
+  grafana:
+    image: grafana/grafana:5.0.0
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=secret
+      - GF_INSTALL_PLUGINS=grafana-clock-panel 1.0.1,grafana-simple-json-datasource,alexanderzobnin-zabbix-app
+#    depends_on:
+#      - prometheus
+    ports:
+      - 3000:3000
+    networks:
+      - overlay
+
+#  chat_app:
+#    image: alexyakovlev90/ay-social-chat:v1
+#    container_name: "ay-social-chat"
+#    restart: on-failure
+#    environment:
+#      CONSUL_HOST: consul
+#      CONSUL_PORT: 8500
+#    ports:
+#      - 9090:9090
+#      - 7070:7070
+#    volumes:
+#      - /tmp:/tmp
+#    networks:
+#      - overlay
+volumes:
+#  prometheus_data:
+  grafana_data:
+
+networks:
+  overlay:

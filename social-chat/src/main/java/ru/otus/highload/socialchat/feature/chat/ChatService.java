@@ -1,5 +1,6 @@
 package ru.otus.highload.socialchat.feature.chat;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.highload.socialchat.domain.ChatDoc;
@@ -15,11 +16,13 @@ public class ChatService {
 
     private final ChatRepository chatRepository;
 
+    @Timed
     public List<ChatDoc> getUserChats(Long userId) {
 //        return chatRepository.findByFromUser(userId);
         return chatRepository.findUserChats(userId);
     }
 
+    @Timed
     public ChatDoc createChat(Long fromUser, Long toUser, Long date) {
         ChatDoc chatDoc = new ChatDoc()
                 .setFromUser(fromUser)

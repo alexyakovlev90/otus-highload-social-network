@@ -1,5 +1,6 @@
 package ru.otus.highload.socialchat.feature.message;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.highload.socialchat.domain.MessageDoc;
@@ -15,6 +16,7 @@ public class MessageController {
 
     private final MessageService messageService;
 
+    @Timed
     @GetMapping
     public ListResponse<MessageDoc> getMessages(@RequestParam("chatId") String chatId,
                                                 @RequestParam(value = "fromDate", required = false) Long fromDate,
@@ -23,6 +25,7 @@ public class MessageController {
         return new ListResponse<>(messages);
     }
 
+    @Timed
     @PostMapping
     public Response<MessageDoc> createMessage(@RequestParam("chatId") String chatId,
                                               @RequestParam("fromUser") Long fromUser,

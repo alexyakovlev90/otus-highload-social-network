@@ -1,5 +1,6 @@
 package ru.otus.highload.socialchat.feature.chat;
 
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.highload.socialchat.domain.ChatDoc;
@@ -15,12 +16,14 @@ public class ChatController {
 
     private final ChatService chatService;
 
+    @Timed
     @GetMapping("/user")
     public ListResponse<ChatDoc> getUserChats(@RequestParam("userId") Long userId) {
         List<ChatDoc> userChats = chatService.getUserChats(userId);
         return new ListResponse<>(userChats);
     }
 
+    @Timed
     @PostMapping()
     public Response<ChatDoc> createChat(@RequestParam("fromUser") Long fromUser, @RequestParam("toUser") Long toUser,
                                         @RequestParam(value = "date", required = false) Long date) {
