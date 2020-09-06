@@ -1,0 +1,15 @@
+version: '3'
+services:
+  redis:
+    image: redis:6
+    container_name: "redis-server"
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru --appendonly yes
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/data:/data
+    networks:
+      - overlay
+
+networks:
+  overlay:
