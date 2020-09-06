@@ -166,13 +166,20 @@
 - Вместо этого данные сохраняются на мобильном устройстве за заданный рабочий промежуток. 
 - Это позволяет при переключени на Backup предоставить всю необходимую информацию для завершения поездки
 
-
-
+## Инциденты
+10/2014 - В период хэллоуина под нагрузкой упало множство систем из за количества поездок
+12/2014 - Резкое увеличение поездок в 2 раза, система не упала из за работ проведенных в период Хэллоуина
+03/2015 - Главная БД вышла из строя, накануне была произведена миграция данных в другой датацентр, что облегчило падение
+02/2017 - Харасмент SRE инженера 
 
 ## Полезные ссылки
 - Architecture - https://eng.uber.com/category/articles/architecture/
 - SRE
   - https://eng.uber.com/site-reliability-engineering-talks-feb-2016/
-
-
-
+- Uber — причины перехода с Postgres на MySQL
+  - https://eng.uber.com/postgres-to-mysql-migration/
+  - https://habr.com/ru/company/southbridge/blog/322624/
+- A History of Site Reliability Engineering at Uber
+  - https://www.youtube.com/watch?v=qJnS-EfIIIE
+- Harassment at Uber
+  - https://www.susanjfowler.com/blog/2017/2/19/reflecting-on-one-very-strange-year-at-uber

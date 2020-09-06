@@ -11,10 +11,11 @@
 
     <modules>
         <module>social-backend</module>
-        <module>social-chat</module>
         <module>social-util</module>
+        <module>social-chat</module>
+        <module>social-counter</module>
 
-        <module>social-frontend</module>
+<!--        <module>social-frontend</module>-->
     </modules>
 
     <properties>
