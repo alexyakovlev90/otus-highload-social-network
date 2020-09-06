@@ -18,4 +18,11 @@ public interface ChatRepository extends MongoRepository<ChatDoc, String> {
     @Query(value="{$or : [{fromUser: ?0}, {toUser: ?0}]}",
             sort="{'dateCreated': -1}")
     List<ChatDoc> findUserChats(Long user);
+
+    @Query(value="{$or : [" +
+            "{$and : [{fromUser: ?1}, {toUser: ?0}]}, " +
+            "{$and : [{fromUser: ?0}, {toUser: ?1}]}" +
+            "]}",
+            exists = true)
+    boolean checkUsersChat(Long first, Long second);
 }

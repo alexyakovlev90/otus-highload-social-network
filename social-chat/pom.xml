@@ -122,6 +122,7 @@
             <artifactId>grpc-protobuf</artifactId>
             <version>${grpc.version}</version>
         </dependency>
+
         <!-- for swagger proxy -->
         <dependency>
             <groupId>io.grpc</groupId>

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package ru.otus.highload.grpc;
+
+service ChatCounterGrpcService {
+    rpc incrChats (UserRequest) returns (CounterResp) {
+    }
+
+    rpc decrChats (UserRequest) returns (CounterResp) {
+    }
+
+    rpc resetChats (UserRequest) returns (EmptyResp) {
+    }
+}
+
+service MessageCounterGrpcService {
+    rpc incrMessages (UserChatRequest) returns (CounterResp) {
+    }
+
+    rpc decrMessages (UserChatRequest) returns (CounterResp) {
+    }
+
+    rpc resetMessages (UserChatRequest) returns (EmptyResp) {
+    }
+}
+
+message EmptyResp {
+}
+
+message UserRequest {
+  int64 userId = 1;
+}
+
+message UserChatRequest {
+  int64 userId = 1;
+  string chat = 2;
+}
+
+message CounterResp {
+  int64 counter = 1;
+}
