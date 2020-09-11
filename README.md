@@ -1,9 +1,9 @@
 # Социальная сеть
 
-- Репа - https://hub.docker.com/repository/docker/alexyakovlev90/ay-social
-- Docker образ - https://hub.docker.com/repository/docker/alexyakovlev90/ay-social
+- Docker образ 
+  - [Бэк + Фронт](https://hub.docker.com/repository/docker/alexyakovlev90/ay-social)
+  - [Сервис чатов](https://hub.docker.com/repository/docker/alexyakovlev90/ay-social-chat)
 - Приложение в AWS - http://ec2-18-195-119-80.eu-central-1.compute.amazonaws.com:8080/
-
 
 ## Архетектура
 
